@@ -1,28 +1,23 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import MainLayout from "../../components/layout/MainLayout";
-import Input from "../../components/ui/Input";
-import Button from "../../components/ui/Button";
-import axios from "axios";
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import MainLayout from '../../components/layout/MainLayout';
+import Input from '../../components/ui/Input';
+import Button from '../../components/ui/Button';
+import axios from 'axios';
 
 export default function RegisterPage() {
   const router = useRouter();
   const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm();
-  const password = watch("password", "");
+  const { register, handleSubmit, formState: { errors }, watch } = useForm();
+  const password = watch('password', '');
 
   const checkEmailAvailability = async (email) => {
     try {
@@ -50,15 +45,15 @@ export default function RegisterPage() {
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    setError("");
+    setError('');
 
     try {
       await axios.post(`${SERVER_NAME}user/register`, data);
 
-      router.push("/dashboard");
+      router.push('/login?registered=true');
     } catch (error) {
-      setError("Registration failed. Please try again.");
-      console.error("Registration error:", error);
+      setError('Registration failed. Please try again.');
+      console.error('Registration error:', error);
     } finally {
       setIsLoading(false);
     }
@@ -127,95 +122,95 @@ export default function RegisterPage() {
 
                 <Input
                   label="Password"
-                  name="password"
-                  type="password"
-                  placeholder="Choose a secure password"
-                  register={register}
-                  error={errors.password}
-                  rules={{
-                    required: "Password is required",
-                    minLength: {
-                      value: 8,
-                      message: "Password must be at least 8 characters",
-                    },
-                  }}
-                />
-
-                <Input
-                  label="Confirm Password"
-                  name="confirmPassword"
-                  type="password"
-                  placeholder="Confirm your password"
-                  register={register}
-                  error={errors.confirmPassword}
-                  rules={{
-                    required: "Please confirm your password",
-                    validate: (value) =>
-                      value === password || "Passwords don't match",
-                  }}
-                />
-
-                <div className="flex items-center">
-                  <input
-                    id="terms"
-                    name="terms"
-                    type="checkbox"
-                    className="h-4 w-4 text-primary-500 focus:ring-primary-500 border-gray-300 rounded"
-                    {...register("terms", {
-                      required: "You must agree to the terms",
-                    })}
+                    name="password"
+                    type="password"
+                    placeholder="Choose a secure password"
+                    register={register}
+                    error={errors.password}
+                    rules={{
+                      required: "Password is required",
+                      minLength: {
+                        value: 8,
+                        message: "Password must be at least 8 characters",
+                      },
+                    }}
                   />
-                  <label
-                    htmlFor="terms"
-                    className="ml-2 block text-sm text-gray-700"
+
+                  <Input
+                    label="Confirm Password"
+                    name="confirmPassword"
+                    type="password"
+                    placeholder="Confirm your password"
+                    register={register}
+                    error={errors.confirmPassword}
+                    rules={{
+                      required: "Please confirm your password",
+                      validate: (value) =>
+                        value === password || "Passwords don't match",
+                    }}
+                  />
+
+                  <div className="flex items-center">
+                    <input
+                      id="terms"
+                      name="terms"
+                      type="checkbox"
+                      className="h-4 w-4 text-primary-500 focus:ring-primary-500 border-gray-300 rounded"
+                      {...register("terms", {
+                        required: "You must agree to the terms",
+                      })}
+                    />
+                    <label
+                      htmlFor="terms"
+                      className="ml-2 block text-sm text-gray-700"
+                    >
+                      I agree to the{" "}
+                      <a
+                        href="#"
+                        className="text-primary-500 hover:text-primary-600"
+                      >
+                        Terms of Service
+                      </a>{" "}
+                      and{" "}
+                      <a
+                        href="#"
+                        className="text-primary-500 hover:text-primary-600"
+                      >
+                        Privacy Policy
+                      </a>
+                    </label>
+                  </div>
+                  {errors.terms && (
+                    <p className="mt-1 text-xs text-red-500">
+                      {errors.terms.message}
+                    </p>
+                  )}
+
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    fullWidth
+                    disabled={isLoading || emailError}
                   >
-                    I agree to the{" "}
-                    <a
-                      href="#"
-                      className="text-primary-500 hover:text-primary-600"
+                    {isLoading ? "Creating Account..." : "Create Account"}
+                  </Button>
+                </form>
+
+                <div className="mt-6 text-center">
+                  <p className="text-sm text-gray-600">
+                    Already have an account?{" "}
+                    <Link
+                      href="/login"
+                      className="font-medium text-primary-500 hover:text-primary-600"
                     >
-                      Terms of Service
-                    </a>{" "}
-                    and{" "}
-                    <a
-                      href="#"
-                      className="text-primary-500 hover:text-primary-600"
-                    >
-                      Privacy Policy
-                    </a>
-                  </label>
-                </div>
-                {errors.terms && (
-                  <p className="mt-1 text-xs text-red-500">
-                    {errors.terms.message}
+                      Sign in
+                    </Link>
                   </p>
-                )}
-
-                <Button
-                  type="submit"
-                  variant="primary"
-                  fullWidth
-                  disabled={isLoading || emailError}
-                >
-                  {isLoading ? "Creating Account..." : "Create Account"}
-                </Button>
-              </form>
-
-              <div className="mt-6 text-center">
-                <p className="text-sm text-gray-600">
-                  Already have an account?{" "}
-                  <Link
-                    href="/login"
-                    className="font-medium text-primary-500 hover:text-primary-600"
-                  >
-                    Sign in
-                  </Link>
-                </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </MainLayout>
-  );
-}
+      </MainLayout>
+    );
+  }

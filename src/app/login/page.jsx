@@ -1,7 +1,7 @@
 // app/login/page.js
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
 import axios from 'axios';
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
   const searchParams = useSearchParams();
@@ -181,5 +181,13 @@ export default function LoginPage() {
         </div>
       </div>
     </MainLayout>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginForm />
+    </Suspense>
   );
 }
