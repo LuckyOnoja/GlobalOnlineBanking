@@ -8,9 +8,12 @@ import Link from 'next/link';
 import MainLayout from '../../components/layout/MainLayout';
 import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
+import axios from 'axios';
+
 
 export default function PropeneerLoginPage() {
   const router = useRouter();
+  const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   
@@ -21,19 +24,11 @@ export default function PropeneerLoginPage() {
     setError('');
     
     try {
-      // This would be an API call in production
-      // const response = await fetch('/api/propeneer/login', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(data)
-      // });
-      
-      // Simulate API call with timeout
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // For demo purposes, just check if username and password exist
-      if (data.username && data.password) {
-        // Success - redirect to dashboard
+      const response = await axios.post(`${SERVER_NAME}propeneer/login`, data); 
+  
+      if (response.data?.token) { 
+        localStorage.setItem("adminToken", response.data.token);
+  
         router.push('/propeneer-dashboard');
       } else {
         setError('Invalid credentials');
@@ -45,6 +40,7 @@ export default function PropeneerLoginPage() {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <MainLayout>

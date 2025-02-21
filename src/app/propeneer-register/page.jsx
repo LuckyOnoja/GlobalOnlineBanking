@@ -1,4 +1,3 @@
-// app/propeneer-register/page.js
 "use client";
 
 import { useState } from "react";
@@ -7,12 +6,16 @@ import { useRouter } from "next/navigation";
 import MainLayout from "../../components/layout/MainLayout";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
+import axios from "axios";
 
 export default function PropeneerRegisterPage() {
   const router = useRouter();
+  const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [usernameError, setUsernameError] = useState("");
 
   const {
     register,
@@ -22,24 +25,64 @@ export default function PropeneerRegisterPage() {
   } = useForm();
   const password = watch("password", "");
 
+  const checkEmailAvailability = async (email) => {
+    try {
+      const response = await axios.post(`${SERVER_NAME}propeneer/check-email`, {
+        email,
+      });
+      return response.data.isTaken;
+    } catch (error) {
+      console.error("Error checking email:", error);
+      return false;
+    }
+  };
+
+  const checkUsernameAvailability = async (username) => {
+    try {
+      const response = await axios.post(
+        `${SERVER_NAME}propeneer/check-username`,
+        { username }
+      );
+      return response.data.isTaken;
+    } catch (error) {
+      console.error("Error checking username:", error);
+      return false;
+    }
+  };
+
+  const handleEmailBlur = async (e) => {
+    const email = e.target.value;
+    if (email) {
+      const isTaken = await checkEmailAvailability(email);
+      if (isTaken) {
+        setEmailError("Email is already registered.");
+      } else {
+        setEmailError("");
+      }
+    }
+  };
+
+  const handleUsernameBlur = async (e) => {
+    const username = e.target.value;
+    if (username) {
+      const isTaken = await checkUsernameAvailability(username);
+      if (isTaken) {
+        setUsernameError("Username is already taken.");
+      } else {
+        setUsernameError("");
+      }
+    }
+  };
+
   const onSubmit = async (data) => {
     setIsLoading(true);
     setError("");
 
     try {
-      // This would call your API to register the user
-      // const response = await fetch('/api/propeneer/register', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(data)
-      // });
-
-      // Simulate API call with timeout
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await axios.post(`${SERVER_NAME}propeneer/register`, data);
 
       setSuccess(true);
 
-      // After 2 seconds, redirect to login
       setTimeout(() => {
         router.push("/propeneer-login");
       }, 2000);
@@ -111,7 +154,8 @@ export default function PropeneerRegisterPage() {
                   placeholder="Enter your email address"
                   register={register}
                   required
-                  error={errors.email}
+                  error={errors.email || emailError}
+                  onBlur={handleEmailBlur}
                 />
 
                 <Input
@@ -121,7 +165,8 @@ export default function PropeneerRegisterPage() {
                   placeholder="Choose a username"
                   register={register}
                   required
-                  error={errors.username}
+                  error={errors.username || usernameError}
+                  onBlur={handleUsernameBlur}
                 />
 
                 <Input
@@ -161,7 +206,7 @@ export default function PropeneerRegisterPage() {
                   type="submit"
                   variant="primary"
                   fullWidth
-                  disabled={isLoading}
+                  disabled={isLoading || emailError || usernameError}
                 >
                   {isLoading ? "Creating Account..." : "Complete Registration"}
                 </Button>

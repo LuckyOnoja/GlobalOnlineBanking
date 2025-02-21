@@ -220,26 +220,18 @@ export default function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
+              className="order-1 lg:order-2"
             >
               <motion.div
-                className="rounded-2xl overflow-hidden shadow-2xl"
+                className="bg-blue-50 p-2 rounded-2xl overflow-hidden shadow-2xl"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                <img
-                  src="/Online-Banking.webp.crdownload"
-                  alt="Mobile Banking App"
-                  className="w-full h-auto"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src =
-                      "https://via.placeholder.com/700x500?text=Mobile+Banking+App";
-                  }}
-                />
+                <MobileBankingAnimation/>
               </motion.div>
             </motion.div>
 
@@ -742,10 +734,164 @@ function ParticleBackground() {
             duration: particle.duration,
             repeat: Infinity,
             delay: particle.delay,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
         />
       ))}
+    </div>
+  );
+}
+
+function MobileBankingAnimation() {
+  const [activeFeature, setActiveFeature] = useState(0);
+
+  const features = [
+    {
+      title: "Seamless Account Management",
+      description:
+        "Manage all your accounts, cards, and investments from a single intuitive dashboard.",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-12 w-12"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 10h16M4 14h16M4 18h16"
+          />
+        </svg>
+      ),
+      color: "#6366F1", // Indigo
+    },
+    {
+      title: "Smart Budgeting Tools",
+      description:
+        "Set financial goals, create custom budgets, and receive automated insights to stay on track.",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-12 w-12"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v1m0 0v1m0-1H9m3 0h3m-3 0H9m3 0h3m-3 0H9m3 0h3M3 12h18M3 6h18M3 18h18"
+          />
+        </svg>
+      ),
+      color: "#10B981", // Emerald
+    },
+    {
+      title: "Contactless Payments",
+      description:
+        "Make secure payments with your phone, smartwatch, or contactless card worldwide.",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-12 w-12"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+          />
+        </svg>
+      ),
+      color: "#EF4444", // Red
+    },
+    {
+      title: "Investment Portfolio",
+      description:
+        "Access global markets, stocks, ETFs, and cryptocurrency trading with low fees.",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-12 w-12"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v1m0 0v1m0-1H9m3 0h3m-3 0H9m3 0h3m-3 0H9m3 0h3M3 12h18M3 6h18M3 18h18"
+          />
+        </svg>
+      ),
+      color: "#F59E0B", // Amber
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveFeature((prev) => (prev + 1) % features.length);
+    }, 5000); // Change feature every 5 seconds
+    return () => clearInterval(interval);
+  }, [features.length]);
+
+  return (
+    <div className="relative w-full h-[500px] flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl overflow-hidden">
+      {/* Background Animation (Behind the Cards) */}
+   
+
+      {/* Feature Cards (Above the Background) */}
+      <div className="relative z-10">
+        {features.map((feature, index) => (
+          <motion.div
+            key={index}
+            className="absolute inset-0 flex items-center justify-center"
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{
+              opacity: activeFeature === index ? 1 : 0,
+              y: activeFeature === index ? 0 : 20,
+              scale: activeFeature === index ? 1 : 0.9,
+            }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="bg-white p-8 rounded-3xl shadow-2xl min-w-[25vw] text-center border border-gray-100">
+              <div
+                className="mx-auto mb-6 p-4 rounded-full bg-opacity-20"
+                style={{ backgroundColor: feature.color }}
+              >
+                {feature.icon}
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600">{feature.description}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Dots Navigation */}
+      <div className="absolute bottom-8 flex space-x-2 z-20">
+        {features.map((_, index) => (
+          <button
+            key={index}
+            className={`w-3 h-3 rounded-full transition-colors ${
+              activeFeature === index
+                ? "bg-indigo-600"
+                : "bg-gray-300 hover:bg-gray-400"
+            }`}
+            onClick={() => setActiveFeature(index)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -758,14 +904,14 @@ function WorldMapAnimation() {
   useEffect(() => {
     // Generate or fetch locations on the client
     const generatedLocations = [
-      { id: 1, x: 25, y: 30, label: 'New York' },
-      { id: 2, x: 48, y: 25, label: 'London' },
-      { id: 3, x: 55, y: 35, label: 'Dubai' },
-      { id: 4, x: 75, y: 32, label: 'Tokyo' },
-      { id: 5, x: 40, y: 65, label: 'Sydney' },
-      { id: 6, x: 35, y: 45, label: 'Lagos' },
-      { id: 7, x: 60, y: 45, label: 'Mumbai' },
-      { id: 8, x: 20, y: 55, label: 'São Paulo' },
+      { id: 1, x: 25, y: 30, label: "New York" },
+      { id: 2, x: 48, y: 25, label: "London" },
+      { id: 3, x: 55, y: 35, label: "Dubai" },
+      { id: 4, x: 75, y: 32, label: "Tokyo" },
+      { id: 5, x: 40, y: 65, label: "Sydney" },
+      { id: 6, x: 35, y: 45, label: "Lagos" },
+      { id: 7, x: 60, y: 45, label: "Mumbai" },
+      { id: 8, x: 20, y: 55, label: "São Paulo" },
     ];
 
     setLocations(generatedLocations);
@@ -815,7 +961,7 @@ function WorldMapAnimation() {
                   duration: 4,
                   repeat: Infinity,
                   delay: index * 0.3,
-                  ease: 'easeInOut',
+                  ease: "easeInOut",
                 }}
               />
             ))}
@@ -838,7 +984,7 @@ function WorldMapAnimation() {
               transition={{
                 duration: 2,
                 repeat: Infinity,
-                repeatType: 'reverse',
+                repeatType: "reverse",
               }}
             />
             <motion.circle
@@ -881,7 +1027,7 @@ function WorldMapAnimation() {
               duration: 3,
               repeat: Infinity,
               delay: location.id * 0.7,
-              ease: 'easeOut',
+              ease: "easeOut",
             }}
           />
         ))}

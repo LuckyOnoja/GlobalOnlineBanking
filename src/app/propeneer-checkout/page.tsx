@@ -7,11 +7,10 @@ import MainLayout from "../../components/layout/MainLayout";
 import Button from "../../components/ui/Button";
 import axios from "axios";
 
-const NEXT_PUBLIC_SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
-const email = process.env.NEXT_PUBLIC_EMAIL;
-
 export default function PropeneerCheckoutPage() {
   const router = useRouter();
+  const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
+  const email = process.env.NEXT_PUBLIC_EMAIL;
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -20,13 +19,10 @@ export default function PropeneerCheckoutPage() {
     setError("");
 
     try {
-      const { data } = await axios.post(
-        `${NEXT_PUBLIC_SERVER_NAME}payment/initialize`,
-        {
-          email,
-          amount: 50000, // Amount in Naira
-        }
-      );
+      const { data } = await axios.post(`${SERVER_NAME}payment/initialize`, {
+        email,
+        amount: 50000, // Amount in Naira
+      });
 
       if (data?.authorization_url) {
         // Redirect user to Paystack payment page
@@ -42,29 +38,28 @@ export default function PropeneerCheckoutPage() {
   };
 
   // Function to verify payment status after redirection
-  const verifyPayment = useCallback(async (reference: string) => {
-    console.log("Verifying reference:", reference); // Debugging
-  
-    try {
-        const { data } = await axios.post(`${NEXT_PUBLIC_SERVER_NAME}payment/verify`, {
-            reference, 
-          });
-  
-      console.log("Verification response:", data); // Debugging
-  
-      if (data?.data?.status === "success") {
-        router.push("/propeneer-success");
-      } else {
+  const verifyPayment = useCallback(
+    async (reference: string) => {
+      try {
+        const { data } = await axios.post(`${SERVER_NAME}payment/verify`, {
+          reference,
+        });
+
+        if (data?.data?.status === "success") {
+          router.push("/propeneer-success");
+        } else {
+          router.push("/propeneer-fail");
+        }
+      } catch (error) {
+        console.error(
+          "Payment verification error:",
+          error.response?.data || error.message
+        );
         router.push("/propeneer-fail");
       }
-    } catch (error) {
-      console.error("Payment verification error:", error.response?.data || error.message);
-      router.push("/propeneer-fail");
-    }
-  }, [router]);
-  
-  
-  
+    },
+    [router]
+  );
 
   // Check for payment reference in URL after redirection
   useEffect(() => {
