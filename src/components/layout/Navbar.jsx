@@ -76,8 +76,9 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className={`text-2xl font-bold ${scrolled ? 'text-primary-600' : 'text-white'}`}>
-              Global Online Banking
+            <span className={`flex gap-2 text-2xl font-bold ${scrolled ? 'text-primary-600' : 'text-white'}`}>
+            <div className="bg-blue-600 text-white h-8 w-8 rounded-md flex items-center justify-center font-bold text-xl">G</div>
+              Global Bank
             </span>
           </Link>
 

@@ -39,7 +39,7 @@ export default function PropeneerCheckoutPage() {
 
   // Function to verify payment status after redirection
   const verifyPayment = useCallback(
-    async (reference: string) => {
+    async (reference) => {
       try {
         const { data } = await axios.post(`${SERVER_NAME}payment/verify`, {
           reference,
