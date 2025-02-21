@@ -116,7 +116,7 @@ export default function Footer() {
             </div>
             <div className="mt-4 md:mt-0">
               <img 
-                src="/security-badges.png" 
+                src="" 
                 alt="Security Certifications" 
                 className="h-8"
                 onError={(e) => {
