@@ -32,9 +32,7 @@ function LoginForm() {
     setError('');
     
     try {
-      const response = await axios.post(`${SERVER_NAME}/user/login`, data, {
-        withCredentials: true,
-      });
+      const response = await axios.post(`${SERVER_NAME}user/login`, data);
 
       if (response.data?.token) { 
         localStorage.setItem("token", response.data.token);
