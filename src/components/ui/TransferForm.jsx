@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function PropeneerTransferForm({ setTransactions, senderId }) {
+export default function PropeneerTransferForm({ setTransactions }) {
   const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState("");
@@ -35,7 +35,7 @@ export default function PropeneerTransferForm({ setTransactions, senderId }) {
       setError("");
     } catch (error) {
       setReceiver(null);
-      setError(error.response?.data?.message || "User not found");
+      setError(error.response?.data?.message || "Account not found");
     }
   };
 
@@ -54,7 +54,7 @@ export default function PropeneerTransferForm({ setTransactions, senderId }) {
 
       const res = await axios.post(
         `${SERVER_NAME}transactions/transfer`,
-        { senderId, receiverAccountNumber: accountNumber, amount: parseFloat(amount) },
+        {receiverAccountNumber: accountNumber, amount: parseFloat(amount) },
         {
           headers: {
             Authorization: `Bearer ${token}`,
