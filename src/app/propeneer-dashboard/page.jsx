@@ -29,7 +29,7 @@ export default function PropeneerDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [propeneer, setPropeneer] = useState({});
   const [accountStats, setAccountStats] = useState({
-    totalBalance: "€3,458,950.00",
+    totalBalance: "€3,458,950",
     totalUsers: 1428,
     monthlyGrowth: "12.4%",
     pendingApprovals: 8,
@@ -253,7 +253,7 @@ export default function PropeneerDashboard() {
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 shadow-sm">
-              <div className="flex items-center gap-3 sm:gap-4">
+              <div className="flex items-center gap-3 sm:gap-4 ">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-blue-50 flex items-center justify-center">
                   <Wallet className="text-blue-600 w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
