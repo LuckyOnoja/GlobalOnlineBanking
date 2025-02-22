@@ -36,7 +36,6 @@ function LoginForm() {
 
       if (response.data?.token) { 
         localStorage.setItem("token", response.data.token);
-  
         router.push('/dashboard');
       } else {
         setError('Invalid credentials');
