@@ -17,10 +17,8 @@ import {
   Download,
   HelpCircle,
   LogOut,
-  DollarSign,
-  ArrowUp,
-  ArrowDown,
-  Clock,
+  Menu,
+  X,
 } from "lucide-react";
 import { FaCopy } from "react-icons/fa";
 import axios from "axios";
@@ -39,6 +37,7 @@ export default function UserDashboard() {
     currency: "EUR",
     accountStatus: "Active",
   });
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [quickAccounts, setQuickAccounts] = useState([
     {
@@ -117,9 +116,25 @@ export default function UserDashboard() {
     getUser();
     fetchTransactions();
 
-    const interval = setInterval(fetchTransactions, 30000); // Every 30 seconds
+    const interval = setInterval(fetchTransactions, getUser, 30000); // Every 30 seconds
     return () => clearInterval(interval);
   }, []);
+
+  // Close sidebar when clicking outside on mobile
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        sidebarOpen &&
+        !e.target.closest(".sidebar") &&
+        !e.target.closest(".mobile-menu-button")
+      ) {
+        setSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [sidebarOpen]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -154,10 +169,39 @@ export default function UserDashboard() {
   };
 
   const initials = getInitials(user.firstName, user.lastName);
+
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row h-screen bg-gray-50">
+      {/* Mobile Header */}
+      <div className="md:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+        <div className="flex items-center">
+          <button
+            className="mobile-menu-button mr-2"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+          <h1 className="text-xl font-bold text-blue-700">
+            Global<span className="text-blue-500">Bank</span>
+          </h1>
+        </div>
+        <div className="flex items-center gap-4">
+          <button className="relative">
+            <Bell size={20} className="text-gray-600" />
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center"></span>
+          </button>
+          <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium">
+            {initials}
+          </div>
+        </div>
+      </div>
+
       {/* Sidebar */}
-      <div className="w-64 bg-white border-r border-gray-200">
+      <div
+        className={`sidebar fixed inset-0 z-40 md:relative md:z-0 md:w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        }`}
+      >
         <div className="p-6 border-b border-gray-200">
           <h1 className="text-2xl font-bold text-blue-700">
             Global<span className="text-blue-500">Bank</span>
@@ -183,6 +227,7 @@ export default function UserDashboard() {
           <Link
             href="/dashboard"
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-blue-700 bg-blue-50 border-l-4 border-blue-600"
+            onClick={() => setSidebarOpen(false)}
           >
             <Home size={18} />
             <span>Dashboard</span>
@@ -190,6 +235,7 @@ export default function UserDashboard() {
           <Link
             href="/accounts"
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
+            onClick={() => setSidebarOpen(false)}
           >
             <Wallet size={18} />
             <span>Accounts</span>
@@ -197,6 +243,7 @@ export default function UserDashboard() {
           <Link
             href="/cards"
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
+            onClick={() => setSidebarOpen(false)}
           >
             <CreditCard size={18} />
             <span>Cards</span>
@@ -204,6 +251,7 @@ export default function UserDashboard() {
           <Link
             href="/transfers"
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
+            onClick={() => setSidebarOpen(false)}
           >
             <Send size={18} />
             <span>Transfers</span>
@@ -211,6 +259,7 @@ export default function UserDashboard() {
           <Link
             href="/history"
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
+            onClick={() => setSidebarOpen(false)}
           >
             <ArrowUpDown size={18} />
             <span>Transaction History</span>
@@ -224,6 +273,7 @@ export default function UserDashboard() {
           <Link
             href="/profile"
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
+            onClick={() => setSidebarOpen(false)}
           >
             <User size={18} />
             <span>Profile</span>
@@ -231,6 +281,7 @@ export default function UserDashboard() {
           <Link
             href="/help"
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
+            onClick={() => setSidebarOpen(false)}
           >
             <HelpCircle size={18} />
             <span>Help Center</span>
@@ -238,6 +289,7 @@ export default function UserDashboard() {
           <Link
             href="/logout"
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 mt-6"
+            onClick={() => setSidebarOpen(false)}
           >
             <LogOut size={18} />
             <span>Logout</span>
@@ -247,8 +299,8 @@ export default function UserDashboard() {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Navigation */}
-        <header className="bg-white border-b border-gray-200">
+        {/* Top Navigation (desktop) */}
+        <header className="hidden md:block bg-white border-b border-gray-200">
           <div className="flex items-center justify-between px-6 py-4">
             <div>
               <h2 className="text-xl font-semibold text-gray-800">
@@ -274,38 +326,45 @@ export default function UserDashboard() {
         </header>
 
         {/* Dashboard Content */}
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-4 md:p-6">
+          {/* Mobile Dashboard Title */}
+          <div className="md:hidden mb-4">
+            <h2 className="text-xl font-semibold text-gray-800">
+              My Dashboard
+            </h2>
+          </div>
+
           {/* Account Summary */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <div className="lg:col-span-2 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl text-white p-6 shadow-lg">
-              <div className="flex justify-between items-start mb-8">
-                <div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+            <div className="lg:col-span-2 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl text-white p-4 md:p-6 shadow-lg">
+              <div className="flex flex-col sm:flex-row justify-between items-start mb-6 md:mb-8">
+                <div className="mb-4 sm:mb-0">
                   <p className="text-blue-100 mb-1">Current Account</p>
                   <h3 className="text-2xl font-bold mb-1">
-                    ${user.balance.toLocaleString()}
+                    ${(user.balance || 0).toLocaleString()}
                   </h3>
                   <p className="text-sm text-blue-100">Available Balance</p>
                 </div>
-                <div className="flex flex-col items-end">
+                <div className="flex flex-col items-start sm:items-end">
                   <p className="text-sm text-blue-100 mb-1">Account Number</p>
                   <span className="font-medium tracking-wider flex items-center gap-2">
                     <span className="flex flex-col">
                       {user.accountNumber}
                       {copiedId === user.accountNumber && (
-                        <span className="text-sm text-green-500">Copied!</span>
+                        <span className="text-sm text-green-300">Copied!</span>
                       )}
                     </span>
                     <button
                       onClick={() => copyToClipboard(user.accountNumber)}
-                      className="text-blue-500 hover:text-blue-700 transition-colors"
-                      title="Copy Transaction ID"
+                      className="text-blue-300 hover:text-blue-100 transition-colors"
+                      title="Copy Account Number"
                     >
                       <FaCopy className="inline-block" />
                     </button>
                   </span>
                 </div>
               </div>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-3">
                 <button
                   onClick={() => setShowTransferModal(true)}
                   className="flex items-center gap-2 bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg text-sm font-medium"
@@ -320,7 +379,7 @@ export default function UserDashboard() {
               </div>
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+            <div className="bg-white rounded-lg border border-gray-200 p-4 md:p-6 shadow-sm">
               <h3 className="font-medium text-gray-800 mb-4">
                 Quick Transfers
               </h3>
@@ -331,7 +390,7 @@ export default function UserDashboard() {
                     className="flex items-center justify-between py-2 border-b border-gray-100"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600">
                         {account.name.charAt(0)}
                       </div>
                       <div>
@@ -359,13 +418,13 @@ export default function UserDashboard() {
 
           {/* Recent Transactions */}
           <div className="bg-white rounded-lg border border-gray-200 shadow-sm mb-6">
-            <div className="border-b border-gray-200 p-6">
-              <div className="flex items-center justify-between">
+            <div className="border-b border-gray-200 p-4 md:p-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <h2 className="text-lg font-semibold text-gray-900">
                   Recent Transactions
                 </h2>
-                <div className="flex items-center gap-3">
-                  <button className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+                <div className="flex flex-wrap items-center gap-3">
+                  <button className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 border border-gray-200 rounded-md text-sm text-gray-700 hover:bg-gray-50">
                     <Calendar size={16} />
                     <span>This Week</span>
                     <ChevronDown size={16} />
@@ -380,7 +439,7 @@ export default function UserDashboard() {
               </div>
             </div>
 
-            <div className="p-6">
+            <div className="p-4 md:p-6 overflow-x-auto">
               {loading ? (
                 <div className="flex items-center justify-center py-12">
                   <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -393,24 +452,29 @@ export default function UserDashboard() {
         </main>
       </div>
 
+      {/* Overlay for mobile when sidebar is open */}
+      {sidebarOpen && (
+        <div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-30"></div>
+      )}
+
       {/* Transfer Modal */}
       {showTransferModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg shadow-lg w-full max-w-md">
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-4 md:p-6 border-b border-gray-200">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-900">
                   Send Money
                 </h3>
                 <button
                   onClick={() => setShowTransferModal(false)}
-                  className="text-gray-400 hover:text-gray-500"
+                  className="text-gray-400 hover:text-gray-500 text-xl"
                 >
                   &times;
                 </button>
               </div>
             </div>
-            <div className="p-6">
+            <div className="p-4 md:p-6">
               <UserTransferForm
                 onComplete={() => setShowTransferModal(false)}
                 quickAccounts={quickAccounts}

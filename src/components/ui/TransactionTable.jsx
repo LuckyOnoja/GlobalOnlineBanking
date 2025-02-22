@@ -51,7 +51,7 @@ export default function TransactionTable({ transactions }) {
                 <td className="py-3 px-4 border-b">
                   {txn.receiver.firstName} {txn.receiver.lastName}
                 </td>
-                <td className="py-3 px-4 border-b">${txn.amount.toLocaleString()}</td>
+                <td className="py-3 px-4 border-b">${(txn.amount || 0).toLocaleString()}</td>
                 <td className="py-3 px-4 border-b">
                   <span
                     className={`${
