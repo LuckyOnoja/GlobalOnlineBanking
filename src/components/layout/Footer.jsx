@@ -8,41 +8,41 @@ export default function Footer() {
     {
       title: 'Solutions',
       links: [
-        { name: 'Personal Banking', href: '/personal' },
-        { name: 'Business Banking', href: '/business' },
-        { name: 'Investments', href: '/investments' },
-        { name: 'Loans', href: '/loans' },
-        { name: 'Mortgages', href: '/mortgages' }
+        { name: 'Personal Banking', href: '/#' },
+        { name: 'Business Banking', href: '/#' },
+        { name: 'Investments', href: '/#' },
+        { name: 'Loans', href: '/#' },
+        { name: 'Mortgages', href: '/#' }
       ]
     },
     {
       title: 'Company',
       links: [
-        { name: 'About Us', href: '/about' },
-        { name: 'Careers', href: '/careers' },
-        { name: 'Press', href: '/press' },
-        { name: 'News', href: '/news' },
-        { name: 'Contact', href: '/contact' }
+        { name: 'About Us', href: '/#' },
+        { name: 'Careers', href: '/#' },
+        { name: 'Press', href: '/#' },
+        { name: 'News', href: '/#' },
+        { name: 'Contact', href: '/#' }
       ]
     },
     {
       title: 'Resources',
       links: [
-        { name: 'Financial Education', href: '/education' },
-        { name: 'Security Center', href: '/security' },
-        { name: 'Branch Locator', href: '/locations' },
-        { name: 'Help Center', href: '/help' },
-        { name: 'FAQs', href: '/faqs' }
+        { name: 'Financial Education', href: '/#' },
+        { name: 'Security Center', href: '/#' },
+        { name: 'Branch Locator', href: '/#' },
+        { name: 'Help Center', href: '/#' },
+        { name: 'FAQs', href: '/#' }
       ]
     },
     {
       title: 'Legal',
       links: [
-        { name: 'Privacy Policy', href: '/privacy' },
-        { name: 'Terms of Service', href: '/terms' },
-        { name: 'Cookies', href: '/cookies' },
-        { name: 'FDIC Information', href: '/fdic' },
-        { name: 'Accessibility', href: '/accessibility' }
+        { name: 'Privacy Policy', href: '/#' },
+        { name: 'Terms of Service', href: '/#' },
+        { name: 'Cookies', href: '/#' },
+        { name: 'FDIC Information', href: '/#' },
+        { name: 'Accessibility', href: '/#' }
       ]
     }
   ];

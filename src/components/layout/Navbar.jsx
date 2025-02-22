@@ -1,4 +1,3 @@
-// components/layout/Navbar.jsx
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -32,17 +31,17 @@ export default function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, [isMenuOpen]);
 
-  const navbarClasses = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-    scrolled 
-      ? 'bg-white shadow-md py-2' 
-      : 'bg-transparent py-4'
+  const navbarClasses = `fixed top-4 left-4 right-4 z-50 transition-all duration-300 rounded-xl backdrop-blur-md ${
+    scrolled
+      ? 'bg-white/90 shadow-lg py-3 border border-gray-200'
+      : 'bg-white/80 shadow-sm py-4 border border-gray-100'
   }`;
 
   const navLinks = [
     { title: 'Personal', href: '/personal' },
     { title: 'Business', href: '/business' },
     { title: 'Investments', href: '/investments' },
-    { title: 'About Us', href: '/about' }
+    { title: 'About Us', href: '/about' },
   ];
 
   const menuVariants = {
@@ -52,32 +51,38 @@ export default function Navbar() {
       transition: {
         duration: 0.3,
         staggerChildren: 0.05,
-        staggerDirection: -1
-      }
+        staggerDirection: -1,
+      },
     },
     open: {
       opacity: 1,
       height: 'auto',
       transition: {
         duration: 0.3,
-        staggerChildren: 0.05
-      }
-    }
+        staggerChildren: 0.05,
+      },
+    },
   };
 
   const itemVariants = {
     closed: { opacity: 0, y: -10 },
-    open: { opacity: 1, y: 0 }
+    open: { opacity: 1, y: 0 },
   };
 
   return (
     <nav className={navbarClasses}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between px-6 items-center">
+        <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className={`flex gap-2 text-2xl font-bold ${scrolled ? 'text-primary-600' : 'text-white'}`}>
-            <div className="bg-blue-600 text-white h-8 w-8 rounded-md flex items-center justify-center font-bold text-xl">G</div>
+            <span
+              className={`flex gap-2 text-2xl font-bold ${
+                scrolled ? 'text-primary-600' : 'text-gray-900'
+              }`}
+            >
+              <div className="bg-blue-600 text-white h-8 w-8 rounded-lg flex items-center justify-center font-bold text-xl">
+                G
+              </div>
               GlobalBank
             </span>
           </Link>
@@ -85,19 +90,19 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
-              <Link 
-                key={link.title} 
+              <Link
+                key={link.title}
                 href={link.href}
                 className={`font-medium hover:text-primary-500 transition-colors ${
-                  scrolled ? 'text-gray-700' : 'text-white'
+                  scrolled ? 'text-gray-700' : 'text-gray-900'
                 }`}
               >
                 {link.title}
               </Link>
             ))}
             <Link href="/login">
-              <Button 
-                variant={scrolled ? "outline" : "secondary"} 
+              <Button
+                variant={scrolled ? 'outline' : 'primary'}
                 className="ml-4"
               >
                 Login
@@ -115,25 +120,25 @@ export default function Navbar() {
             aria-label="Toggle menu"
           >
             <div className="relative w-6 h-5">
-              <span 
+              <span
                 className={`absolute h-0.5 w-6 transform transition duration-300 ease-in-out ${
-                  isMenuOpen 
-                    ? 'rotate-45 translate-y-2.5 bg-gray-900' 
-                    : `${scrolled ? 'bg-gray-900' : 'bg-white'}`
+                  isMenuOpen
+                    ? 'rotate-45 translate-y-2.5 bg-gray-900'
+                    : `${scrolled ? 'bg-gray-900' : 'bg-gray-900'}`
                 }`}
               />
-              <span 
+              <span
                 className={`absolute h-0.5 w-6 top-2 transition-opacity duration-300 ease-in-out ${
-                  isMenuOpen 
-                    ? 'opacity-0' 
-                    : `opacity-100 ${scrolled ? 'bg-gray-900' : 'bg-white'}`
+                  isMenuOpen
+                    ? 'opacity-0'
+                    : `opacity-100 ${scrolled ? 'bg-gray-900' : 'bg-gray-900'}`
                 }`}
               />
-              <span 
+              <span
                 className={`absolute h-0.5 w-6 top-4 transform transition duration-300 ease-in-out ${
-                  isMenuOpen 
-                    ? '-rotate-45 -translate-y-2.5 bg-gray-900' 
-                    : `${scrolled ? 'bg-gray-900' : 'bg-white'}`
+                  isMenuOpen
+                    ? '-rotate-45 -translate-y-2.5 bg-gray-900'
+                    : `${scrolled ? 'bg-gray-900' : 'bg-gray-900'}`
                 }`}
               />
             </div>
@@ -153,7 +158,7 @@ export default function Navbar() {
               <div className="px-4 py-2">
                 {navLinks.map((link) => (
                   <motion.div key={link.title} variants={itemVariants}>
-                    <Link 
+                    <Link
                       href={link.href}
                       className="block py-3 text-gray-900 font-medium hover:text-primary-500 transition-colors"
                       onClick={() => setIsMenuOpen(false)}
@@ -165,8 +170,8 @@ export default function Navbar() {
                 ))}
 
                 <motion.div variants={itemVariants} className="pt-2 pb-4 space-y-3">
-                  <Link 
-                    href="/propeneer-login" 
+                  <Link
+                    href="/login"
                     onClick={() => setIsMenuOpen(false)}
                     className="block w-full"
                   >
@@ -174,8 +179,8 @@ export default function Navbar() {
                       Login
                     </Button>
                   </Link>
-                  <Link 
-                    href="/join" 
+                  <Link
+                    href="/register"
                     onClick={() => setIsMenuOpen(false)}
                     className="block w-full"
                   >
