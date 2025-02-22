@@ -71,7 +71,7 @@ export default function Navbar() {
 
   return (
     <nav className={navbarClasses}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center">
@@ -119,7 +119,7 @@ export default function Navbar() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            <div className="relative w-6 h-5">
+            <div className="relative w-6 h-5 ">
               <span
                 className={`absolute h-0.5 w-6 transform transition duration-300 ease-in-out ${
                   isMenuOpen

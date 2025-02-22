@@ -36,8 +36,8 @@ export default function Home() {
   return (
     <MainLayout>
       {/* Hero Section with Parallax Effect */}
-      <section className="relative h-screen overflow-hidden w-[101vw] ">
-        {/* Background Image with Parallax Effect */}
+      <section className="relative h-screen overflow-hidden  ">
+     
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{
@@ -49,60 +49,59 @@ export default function Home() {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary-900/70 via-primary-900/50 to-primary-900/70 z-10" />
 
-        {/* Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-          <motion.div
-            className="w-full text-center md:text-left"
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
-            {/* Headline */}
-            <motion.h1
-              className="text-5xl md:text-7xl font-bold text-white mb-8"
-              variants={fadeInUp}
-            >
-              <span className="block">Global Online Banking</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 to-blue-400">
-                Reimagined
-              </span>{" "}
-              for the Digital Age
-            </motion.h1>
+        <div className="relative z-20 mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center max-w-7xl">
+      <motion.div
+        className="w-full text-center md:text-left"
+        initial="hidden"
+        animate="visible"
+        variants={staggerContainer}
+      >
+        {/* Headline */}
+        <motion.h1
+          className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 md:mb-8"
+          variants={fadeInUp}
+        >
+          <span className="block">Global Online Banking</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 to-blue-400">
+            Reimagined
+          </span>{" "}
+          <span className="block sm:inline">for the Digital Age</span>
+        </motion.h1>
 
-            {/* Subtitle */}
-            <motion.p
-              className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto md:mx-0"
-              variants={fadeInUp}
-            >
-              Experience seamless, secure, and innovative banking solutions
-              designed to meet your financial needs in our increasingly
-              connected world.
-            </motion.p>
+        {/* Subtitle */}
+        <motion.p
+          className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 md:mb-12 max-w-2xl mx-auto md:mx-0"
+          variants={fadeInUp}
+        >
+          Experience seamless, secure, and innovative banking solutions
+          designed to meet your financial needs in our increasingly
+          connected world.
+        </motion.p>
 
-            {/* Buttons */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-6 justify-center md:justify-start"
-              variants={fadeInUp}
+        {/* Buttons */}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start"
+          variants={fadeInUp}
+        >
+          <Link href="/register" className="w-full sm:w-auto">
+            <Button
+              variant="primary"
+              className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
-              <Link href="/register">
-                <Button
-                  variant="primary"
-                  className="text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                >
-                  Get Started Now
-                </Button>
-              </Link>
-              <Link href="/login">
-                <Button
-                  variant="secondary"
-                  className="text-lg px-8 py-4 rounded-full border-2 border-white hover:bg-white/10 transition-all duration-300"
-                >
-                  Existing Customer Login
-                </Button>
-              </Link>
-            </motion.div>
-          </motion.div>
-        </div>
+              Get Started Now
+            </Button>
+          </Link>
+          <Link href="/login" className="w-full sm:w-auto">
+            <Button
+              variant="secondary"
+              className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-white hover:bg-white/10 transition-all duration-300"
+            >
+              Existing Customer Login
+            </Button>
+          </Link>
+        </motion.div>
+      </motion.div>
+    </div>
 
         {/* Scroll Indicator */}
         <motion.div
