@@ -201,82 +201,117 @@ export default function Home() {
       </section>
 
       {/* Digital Banking Services */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-          >
-            <h2 className="text-4xl font-bold text-gray-900">
-              Comprehensive Digital Services
-            </h2>
-            <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
-              Everything you need for modern banking, all in one platform
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="bg-white flex items-center justify-center">
+        <section className="py-24 bg-white w-[90%]  rounded-lg ">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              className="order-1 lg:order-2"
+              transition={{ duration: 0.7 }}
             >
-              <motion.div
-                className="bg-blue-50 p-2 rounded-2xl overflow-hidden shadow-2xl"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <MobileBankingAnimation/>
-              </motion.div>
+              <h2 className="text-4xl font-bold text-gray-900">
+                Comprehensive Digital Services
+              </h2>
+              <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
+                Everything you need for modern banking, all in one platform
+              </p>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-            >
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">
-                Mobile-First Banking Experience
-              </h3>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="order-1 lg:order-2"
+              >
+                <motion.div
+                  className="bg-blue-50 p-2 rounded-2xl overflow-hidden shadow-2xl"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <MobileBankingAnimation />
+                </motion.div>
+              </motion.div>
 
-              <ul className="space-y-6">
-                {[
-                  {
-                    title: "Seamless Account Management",
-                    description:
-                      "Manage all your accounts, cards, and investments from a single intuitive dashboard.",
-                  },
-                  {
-                    title: "Smart Budgeting Tools",
-                    description:
-                      "Set financial goals, create custom budgets, and receive automated insights to stay on track.",
-                  },
-                  {
-                    title: "Contactless Payments",
-                    description:
-                      "Make secure payments with your phone, smartwatch, or contactless card worldwide.",
-                  },
-                  {
-                    title: "Investment Portfolio",
-                    description:
-                      "Access global markets, stocks, ETFs, and cryptocurrency trading with low fees.",
-                  },
-                ].map((item, index) => (
-                  <motion.li
-                    key={index}
-                    className="flex items-start gap-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                  >
-                    <div className="bg-primary-100 text-primary-600 p-2 rounded-full mt-1">
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+              >
+                <h3 className="text-3xl font-bold text-gray-900 mb-6">
+                  Mobile-First Banking Experience
+                </h3>
+
+                <ul className="space-y-6">
+                  {[
+                    {
+                      title: "Seamless Account Management",
+                      description:
+                        "Manage all your accounts, cards, and investments from a single intuitive dashboard.",
+                    },
+                    {
+                      title: "Smart Budgeting Tools",
+                      description:
+                        "Set financial goals, create custom budgets, and receive automated insights to stay on track.",
+                    },
+                    {
+                      title: "Contactless Payments",
+                      description:
+                        "Make secure payments with your phone, smartwatch, or contactless card worldwide.",
+                    },
+                    {
+                      title: "Investment Portfolio",
+                      description:
+                        "Access global markets, stocks, ETFs, and cryptocurrency trading with low fees.",
+                    },
+                  ].map((item, index) => (
+                    <motion.li
+                      key={index}
+                      className="flex items-start gap-4"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                    >
+                      <div className="bg-primary-100 text-primary-600 p-2 rounded-full mt-1">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-xl font-semibold text-gray-900 mb-2">
+                          {item.title}
+                        </h4>
+                        <p className="text-gray-600">{item.description}</p>
+                      </div>
+                    </motion.li>
+                  ))}
+                </ul>
+
+                <motion.div
+                  className="mt-10"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Link href="/services">
+                    <Button
+                      variant="outline"
+                      className="text-lg px-6 py-3 flex items-center gap-2"
+                    >
+                      <span>Explore All Services</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-5 w-5"
@@ -285,51 +320,18 @@ export default function Home() {
                       >
                         <path
                           fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
                           clipRule="evenodd"
                         />
                       </svg>
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-semibold text-gray-900 mb-2">
-                        {item.title}
-                      </h4>
-                      <p className="text-gray-600">{item.description}</p>
-                    </div>
-                  </motion.li>
-                ))}
-              </ul>
-
-              <motion.div
-                className="mt-10"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Link href="/services">
-                  <Button
-                    variant="outline"
-                    className="text-lg px-6 py-3 flex items-center gap-2"
-                  >
-                    <span>Explore All Services</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </Button>
-                </Link>
+                    </Button>
+                  </Link>
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* Testimonials Section with Sliding Animation */}
       <section className="py-24 bg-blue-50">
@@ -407,110 +409,113 @@ export default function Home() {
       </section>
 
       {/* Global Presence Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-          >
-            <h2 className="text-4xl font-bold text-gray-900">
-              Global Presence, Local Expertise
-            </h2>
-            <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
-              Banking without borders, accessible whenever and wherever you need
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="bg-white flex items-center justify-center py-8">
+        <section className="py-24 bg-white w-[88%]  rounded-lg">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              className="order-2 lg:order-1"
+              transition={{ duration: 0.7 }}
             >
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">
-                Banking Without Boundaries
-              </h3>
-              <p className="text-gray-600 mb-8">
-                Global Online Banking operates in over 100 countries, providing
-                seamless financial services across borders. Our international
-                network ensures you can access your money and services no matter
-                where life takes you.
+              <h2 className="text-4xl font-bold text-gray-900">
+                Global Presence, Local Expertise
+              </h2>
+              <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
+                Banking without borders, accessible whenever and wherever you
+                need
               </p>
-
-              <ul className="space-y-6">
-                {[
-                  {
-                    title: "24/7 Global Support",
-                    description:
-                      "Access our multilingual support team anytime, anywhere through chat, call, or video conference.",
-                  },
-                  {
-                    title: "Multi-Currency Accounts",
-                    description:
-                      "Hold, exchange, and manage multiple currencies with real-time exchange rates and minimal fees.",
-                  },
-                  {
-                    title: "International Banking Network",
-                    description:
-                      "Enjoy fee-free ATM withdrawals and banking services through our partner network worldwide.",
-                  },
-                ].map((item, index) => (
-                  <motion.li
-                    key={index}
-                    className="flex items-start gap-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                  >
-                    <div className="bg-primary-100 text-primary-600 p-2 rounded-full mt-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-semibold text-gray-900 mb-2">
-                        {item.title}
-                      </h4>
-                      <p className="text-gray-600">{item.description}</p>
-                    </div>
-                  </motion.li>
-                ))}
-              </ul>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              className="order-1 lg:order-2"
-            >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <motion.div
-                className="bg-blue-50 p-2 rounded-2xl overflow-hidden shadow-2xl"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="order-2 lg:order-1"
               >
-                <WorldMapAnimation />
+                <h3 className="text-3xl font-bold text-gray-900 mb-6">
+                  Banking Without Boundaries
+                </h3>
+                <p className="text-gray-600 mb-8">
+                  Global Online Banking operates in over 100 countries,
+                  providing seamless financial services across borders. Our
+                  international network ensures you can access your money and
+                  services no matter where life takes you.
+                </p>
+
+                <ul className="space-y-6">
+                  {[
+                    {
+                      title: "24/7 Global Support",
+                      description:
+                        "Access our multilingual support team anytime, anywhere through chat, call, or video conference.",
+                    },
+                    {
+                      title: "Multi-Currency Accounts",
+                      description:
+                        "Hold, exchange, and manage multiple currencies with real-time exchange rates and minimal fees.",
+                    },
+                    {
+                      title: "International Banking Network",
+                      description:
+                        "Enjoy fee-free ATM withdrawals and banking services through our partner network worldwide.",
+                    },
+                  ].map((item, index) => (
+                    <motion.li
+                      key={index}
+                      className="flex items-start gap-4"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                    >
+                      <div className="bg-primary-100 text-primary-600 p-2 rounded-full mt-1">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-xl font-semibold text-gray-900 mb-2">
+                          {item.title}
+                        </h4>
+                        <p className="text-gray-600">{item.description}</p>
+                      </div>
+                    </motion.li>
+                  ))}
+                </ul>
               </motion.div>
-            </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="order-1 lg:order-2"
+              >
+                <motion.div
+                  className="bg-blue-50 p-2 rounded-2xl overflow-hidden shadow-2xl"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <WorldMapAnimation />
+                </motion.div>
+              </motion.div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* CTA Section */}
       <section className="py-24 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
@@ -844,9 +849,8 @@ function MobileBankingAnimation() {
   }, [features.length]);
 
   return (
-    <div className="relative w-full h-[500px] flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl overflow-hidden">
+    <div className="relative w-full h-[500px] flex items-center justify-center bg-blue-50 rounded-3xl overflow-hidden">
       {/* Background Animation (Behind the Cards) */}
-   
 
       {/* Feature Cards (Above the Background) */}
       <div className="relative z-10">
@@ -862,7 +866,7 @@ function MobileBankingAnimation() {
             }}
             transition={{ duration: 0.5 }}
           >
-            <div className="bg-white p-8 rounded-3xl shadow-2xl min-w-[25vw] text-center border border-gray-100">
+            <div className="bg-white p-8 rounded-3xl shadow-2xl min-w-[75vw] lg:min-w-[25vw] text-center border border-gray-100">
               <div
                 className="mx-auto mb-6 p-4 rounded-full bg-opacity-20"
                 style={{ backgroundColor: feature.color }}
@@ -895,7 +899,6 @@ function MobileBankingAnimation() {
     </div>
   );
 }
-
 
 // World Map Animation Component
 function WorldMapAnimation() {
