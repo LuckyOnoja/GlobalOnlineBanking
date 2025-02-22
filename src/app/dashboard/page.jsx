@@ -153,6 +153,9 @@ export default function UserDashboard() {
     return `${firstInitial}${lastInitial}`.toUpperCase(); // Convert to uppercase
   };
 
+  
+  const initials = getInitials(user.firstName, user.lastName);
+
   const [copiedId, setCopiedId] = useState(null); // Track which Account Number was copied
 
   // Function to copy the account number to the clipboard
@@ -168,7 +171,6 @@ export default function UserDashboard() {
       });
   };
 
-  const initials = getInitials(user.firstName, user.lastName);
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-50">

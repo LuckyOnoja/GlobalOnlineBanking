@@ -27,6 +27,7 @@ export default function PropeneerDashboard() {
   const [error, setError] = useState();
   const [showTransferModal, setShowTransferModal] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [propeneer, setPropeneer] = useState({});
   const [accountStats, setAccountStats] = useState({
     totalBalance: "€3,458,950.00",
     totalUsers: 1428,
@@ -36,6 +37,28 @@ export default function PropeneerDashboard() {
 
   const getAuthToken = () => {
     return localStorage.getItem("adminToken");
+  };
+
+  const getPropeneer = async () => {
+    try {
+      const token = getAuthToken();
+      if (!token) {
+        setError("Authentication token not found. Please log in.");
+        return;
+      }
+
+      const res = await axios.get(`${SERVER_NAME}propeneer`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setPropeneer(res.data.user);
+      console.log("Propeneer", res.data.user);
+      setError("");
+    } catch (error) {
+      setPropeneer(null);
+      setError(error.response?.data?.message || "User not found");
+    }
   };
 
   // Fetch transactions for the logged-in user
@@ -67,6 +90,7 @@ export default function PropeneerDashboard() {
   // Poll for real-time updates
   useEffect(() => {
     fetchTransactions();
+    getPropeneer();
     const interval = setInterval(fetchTransactions, 5000); // Every 5 seconds
     return () => clearInterval(interval);
   }, []);
@@ -81,6 +105,15 @@ export default function PropeneerDashboard() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+   // Function to get initials from firstName and lastName
+   const getInitials = (username) => {
+    const initial = username ? username.charAt(0) : "";
+    return `${initial}`.toUpperCase(); // Convert to uppercase
+  };
+
+  
+  const initials = getInitials(propeneer.username);
 
   return (
     <div className="flex flex-col lg:flex-row h-screen bg-gray-50 overflow-hidden">
@@ -111,10 +144,10 @@ export default function PropeneerDashboard() {
         <div className="p-4">
           <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
             <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
-              AP
+              {initials}
             </div>
             <div>
-              <p className="font-medium text-sm">Admin Portal</p>
+              <p className="font-medium text-sm">{propeneer.username} </p>
               <p className="text-xs text-gray-500">Propeneer Access</p>
             </div>
           </div>
@@ -134,21 +167,21 @@ export default function PropeneerDashboard() {
             <span>Dashboard</span>
           </Link>
           <Link
-            href="/users"
+            href="/propeneer-dashboard"
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
           >
             <Users size={18} />
             <span>Users</span>
           </Link>
           <Link
-            href="/transactions"
+            href="/propeneer-transactions"
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
           >
             <ArrowUpDown size={18} />
             <span>Transactions</span>
           </Link>
           <Link
-            href="/accounts"
+            href="/#"
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
           >
             <CreditCard size={18} />
@@ -161,7 +194,7 @@ export default function PropeneerDashboard() {
             </p>
           </div>
           <Link
-            href="/settings"
+            href="/propeneer-settings"
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
           >
             <Wallet size={18} />
@@ -204,7 +237,7 @@ export default function PropeneerDashboard() {
               </button>
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium">
-                  P
+                  {initials}
                 </div>
                 <span className="text-sm font-medium hidden sm:inline">
                   Admin
