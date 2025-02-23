@@ -25,7 +25,7 @@ import axios from "axios";
 
 export default function UserDashboard() {
   const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
-  const FAT_NAME = NEXT_PUBLIC_FAT_NAME
+  const FAT_NAME = process.env.NEXT_PUBLIC_FAT_NAME;
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
@@ -399,8 +399,8 @@ export default function UserDashboard() {
                   <span>Download Statement</span>
                 </button>
               </div>
-                  {/* FAT Verification Prompt */}
-                  {user.fatStatus === "not verified" && (
+              {/* FAT Verification Prompt */}
+              {user.fatStatus === "not verified" && (
                 <div className="bg-yellow-100 text-yellow-800 p-4 rounded-lg mt-6 flex items-center justify-between">
                   <div>
                     <p className="font-medium">Your FAT ID is not verified.</p>
@@ -416,7 +416,6 @@ export default function UserDashboard() {
                   </a>
                 </div>
               )}
-
             </div>
 
             <div className="bg-white rounded-lg border border-gray-200 p-4 md:p-6 shadow-sm">
