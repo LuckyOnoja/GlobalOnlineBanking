@@ -25,6 +25,7 @@ import axios from "axios";
 
 export default function UserDashboard() {
   const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
+  const FAT_NAME = NEXT_PUBLIC_FAT_NAME
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
@@ -153,7 +154,6 @@ export default function UserDashboard() {
     return `${firstInitial}${lastInitial}`.toUpperCase(); // Convert to uppercase
   };
 
-  
   const initials = getInitials(user.firstName, user.lastName);
 
   const [copiedId, setCopiedId] = useState(null); // Track which Account Number was copied
@@ -170,7 +170,6 @@ export default function UserDashboard() {
         console.error("Failed to copy:", err);
       });
   };
-
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-50">
@@ -339,7 +338,8 @@ export default function UserDashboard() {
           {/* Account Summary */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
             <div className="lg:col-span-2 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl text-white p-4 md:p-6 shadow-lg">
-              <div className="flex flex-col sm:flex-row justify-between items-start mb-6 md:mb-8">
+              {/* Account Information */}
+              <div className="flex flex-col sm:flex-row justify-around items-start mb-6 md:mb-8">
                 <div className="mb-4 sm:mb-0">
                   <p className="text-blue-100 mb-1">Current Account</p>
                   <h3 className="text-2xl font-bold mb-1">
@@ -365,7 +365,27 @@ export default function UserDashboard() {
                     </button>
                   </span>
                 </div>
+                <div className="flex flex-col items-start sm:items-end">
+                  <p className="text-sm text-blue-100 mb-1">FAT ID</p>
+                  <span className="font-medium tracking-wider flex items-center gap-2">
+                    <span className="flex flex-col">
+                      {user.fatId}
+                      {copiedId === user.fatId && (
+                        <span className="text-sm text-green-300">Copied!</span>
+                      )}
+                    </span>
+                    <button
+                      onClick={() => copyToClipboard(user.fatId)}
+                      className="text-blue-300 hover:text-blue-100 transition-colors"
+                      title="Copy Account Number"
+                    >
+                      <FaCopy className="inline-block" />
+                    </button>
+                  </span>
+                </div>
               </div>
+
+              {/* Action Buttons */}
               <div className="flex flex-wrap gap-3">
                 <button
                   onClick={() => setShowTransferModal(true)}
@@ -379,6 +399,24 @@ export default function UserDashboard() {
                   <span>Download Statement</span>
                 </button>
               </div>
+                  {/* FAT Verification Prompt */}
+                  {user.fatStatus === "not verified" && (
+                <div className="bg-yellow-100 text-yellow-800 p-4 rounded-lg mt-6 flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Your FAT ID is not verified.</p>
+                    <p className="text-sm">
+                      Please verify your FAT ID to access all features.
+                    </p>
+                  </div>
+                  <a
+                    href={`${FAT_NAME}`}
+                    className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors text-sm font-medium"
+                  >
+                    Verify FAT ID
+                  </a>
+                </div>
+              )}
+
             </div>
 
             <div className="bg-white rounded-lg border border-gray-200 p-4 md:p-6 shadow-sm">
