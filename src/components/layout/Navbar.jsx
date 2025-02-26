@@ -38,10 +38,10 @@ export default function Navbar() {
   }`;
 
   const navLinks = [
-    { title: 'Personal', href: '/personal' },
-    { title: 'Business', href: '/business' },
-    { title: 'Investments', href: '/investments' },
-    { title: 'About Us', href: '/about' },
+    { title: 'Personal', href: '/#' },
+    { title: 'Business', href: '/#' },
+    { title: 'Investments', href: '/#' },
+    { title: 'About Us', href: '/#' },
   ];
 
   const menuVariants = {
