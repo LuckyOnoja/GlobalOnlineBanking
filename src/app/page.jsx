@@ -37,7 +37,6 @@ export default function Home() {
     <MainLayout>
       {/* Hero Section with Parallax Effect */}
       <section className="relative h-screen overflow-hidden  ">
-     
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{
@@ -50,58 +49,58 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-primary-900/70 via-primary-900/50 to-primary-900/70 z-10" />
 
         <div className="relative z-20 mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center max-w-7xl">
-      <motion.div
-        className="w-full text-center md:text-left"
-        initial="hidden"
-        animate="visible"
-        variants={staggerContainer}
-      >
-        {/* Headline */}
-        <motion.h1
-          className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 md:mb-8"
-          variants={fadeInUp}
-        >
-          <span className="block">Global Online Banking</span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 to-blue-400">
-            Reimagined
-          </span>{" "}
-          <span className="block sm:inline">for the Digital Age</span>
-        </motion.h1>
-
-        {/* Subtitle */}
-        <motion.p
-          className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 md:mb-12 max-w-2xl mx-auto md:mx-0"
-          variants={fadeInUp}
-        >
-          Experience seamless, secure, and innovative banking solutions
-          designed to meet your financial needs in our increasingly
-          connected world.
-        </motion.p>
-
-        {/* Buttons */}
-        <motion.div
-          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start"
-          variants={fadeInUp}
-        >
-          <Link href="/register" className="w-full sm:w-auto">
-            <Button
-              variant="primary"
-              className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          <motion.div
+            className="w-full text-center md:text-left"
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+          >
+            {/* Headline */}
+            <motion.h1
+              className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 md:mb-8"
+              variants={fadeInUp}
             >
-              Get Started Now
-            </Button>
-          </Link>
-          <Link href="/login" className="w-full sm:w-auto">
-            <Button
-              variant="secondary"
-              className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-white hover:bg-white/10 transition-all duration-300"
+              <span className="block">Global Online Banking</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 to-blue-400">
+                Reimagined
+              </span>{" "}
+              <span className="block sm:inline">for the Digital Age</span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 md:mb-12 max-w-2xl mx-auto md:mx-0"
+              variants={fadeInUp}
             >
-              Existing Customer Login
-            </Button>
-          </Link>
-        </motion.div>
-      </motion.div>
-    </div>
+              Experience seamless, secure, and innovative banking solutions
+              designed to meet your financial needs in our increasingly
+              connected world.
+            </motion.p>
+
+            {/* Buttons */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start"
+              variants={fadeInUp}
+            >
+              <Link href="/register" className="w-full sm:w-auto">
+                <Button
+                  variant="primary"
+                  className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  Get Started Now
+                </Button>
+              </Link>
+              <Link href="/login" className="w-full sm:w-auto">
+                <Button
+                  variant="secondary"
+                  className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-white hover:bg-white/10 transition-all duration-300"
+                >
+                  Existing Customer Login
+                </Button>
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
 
         {/* Scroll Indicator */}
         <motion.div
@@ -211,46 +210,25 @@ export default function Home() {
 
       {/* Digital Banking Services */}
       <div className="bg-white flex items-center justify-center">
-        <section className="py-24 bg-white w-[90%]  rounded-lg ">
+        <section className="py-24 bg-white w-full max-w-[90%] rounded-lg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              className="text-center mb-16"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7 }}
-            >
+            <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-900">
                 Comprehensive Digital Services
               </h2>
               <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
                 Everything you need for modern banking, all in one platform
               </p>
-            </motion.div>
+            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8 }}
-                className="order-1 lg:order-2"
-              >
-                <motion.div
-                  className="bg-blue-50 p-2 rounded-2xl overflow-hidden shadow-2xl"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
+              <div className="order-1 lg:order-2">
+                <div className="bg-blue-50 p-2 rounded-2xl overflow-hidden shadow-2xl">
                   <MobileBankingAnimation />
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8 }}
-              >
+              <div>
                 <h3 className="text-3xl font-bold text-gray-900 mb-6">
                   Mobile-First Banking Experience
                 </h3>
@@ -278,14 +256,7 @@ export default function Home() {
                         "Access global markets, stocks, ETFs, and cryptocurrency trading with low fees.",
                     },
                   ].map((item, index) => (
-                    <motion.li
-                      key={index}
-                      className="flex items-start gap-4"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      transition={{ delay: index * 0.1, duration: 0.5 }}
-                    >
+                    <li key={index} className="flex items-start gap-4">
                       <div className="bg-primary-100 text-primary-600 p-2 rounded-full mt-1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -306,15 +277,11 @@ export default function Home() {
                         </h4>
                         <p className="text-gray-600">{item.description}</p>
                       </div>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
 
-                <motion.div
-                  className="mt-10"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
+                <div className="mt-10">
                   <Link href="/services">
                     <Button
                       variant="outline"
@@ -335,8 +302,8 @@ export default function Home() {
                       </svg>
                     </Button>
                   </Link>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -419,15 +386,9 @@ export default function Home() {
 
       {/* Global Presence Section */}
       <div className="bg-white flex items-center justify-center py-8">
-        <section className="py-24 bg-white w-[88%]  rounded-lg">
+        <section className="py-24 bg-white w-full max-w-[88%] rounded-lg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              className="text-center mb-16"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7 }}
-            >
+            <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-900">
                 Global Presence, Local Expertise
               </h2>
@@ -435,16 +396,10 @@ export default function Home() {
                 Banking without borders, accessible whenever and wherever you
                 need
               </p>
-            </motion.div>
+            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8 }}
-                className="order-2 lg:order-1"
-              >
+              <div className="order-2 lg:order-1">
                 <h3 className="text-3xl font-bold text-gray-900 mb-6">
                   Banking Without Boundaries
                 </h3>
@@ -473,14 +428,7 @@ export default function Home() {
                         "Enjoy fee-free ATM withdrawals and banking services through our partner network worldwide.",
                     },
                   ].map((item, index) => (
-                    <motion.li
-                      key={index}
-                      className="flex items-start gap-4"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      transition={{ delay: index * 0.1, duration: 0.5 }}
-                    >
+                    <li key={index} className="flex items-start gap-4">
                       <div className="bg-primary-100 text-primary-600 p-2 rounded-full mt-1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -501,26 +449,16 @@ export default function Home() {
                         </h4>
                         <p className="text-gray-600">{item.description}</p>
                       </div>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8 }}
-                className="order-1 lg:order-2"
-              >
-                <motion.div
-                  className="bg-blue-50 p-2 rounded-2xl overflow-hidden shadow-2xl"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
+              <div className="order-1 lg:order-2">
+                <div className="bg-blue-50 p-2 rounded-2xl overflow-hidden shadow-2xl">
                   <WorldMapAnimation />
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
