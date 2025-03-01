@@ -1,0 +1,54 @@
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
+
+// Export the ToastContainer to be used in your layout
+
+const FAT_NAME = process.env.NEXT_PUBLIC_FAT_NAME; 
+
+export const Toast = () => (
+  <ToastContainer
+    position="top-right"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+  />
+);
+
+// Export the toast function to trigger toasts
+export const showToast = (message, type = "default") => {
+  switch (type) {
+    case "success":
+      toast.success(message);
+      break;
+    case "error":
+      toast.error(message);
+      break;
+    case "warning":
+      // Custom warning toast with a button
+      toast.warning(
+        <div>
+          <p>{message}</p>
+          <Link
+            href={`${FAT_NAME}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-block px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors"
+          >
+            Verify FAT
+          </Link>
+        </div>
+      );
+      break;
+    case "info":
+      toast.info(message);
+      break;
+    default:
+      toast(message);
+  }
+};

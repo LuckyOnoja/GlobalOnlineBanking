@@ -24,8 +24,7 @@ import {
 import { FaCopy } from "react-icons/fa";
 import axios from "axios";
 
-
-export default function UserDashboard() {
+export default function History() {
   const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
   const FAT_NAME = process.env.NEXT_PUBLIC_FAT_NAME;
   const [transactions, setTransactions] = useState([]);
@@ -158,30 +157,15 @@ export default function UserDashboard() {
 
   const initials = getInitials(user.firstName, user.lastName);
 
-  const [copiedId, setCopiedId] = useState(null); // Track which Account Number was copied
-
-  // Function to copy the account number to the clipboard
-  const copyToClipboard = (accountNumber) => {
-    navigator.clipboard
-      .writeText(accountNumber)
-      .then(() => {
-        setCopiedId(accountNumber); // Set the copied account number
-        setTimeout(() => setCopiedId(null), 2000); // Reset after 2 seconds
-      })
-      .catch((err) => {
-        console.error("Failed to copy:", err);
-      });
-  };
-
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("adminToken");
     window.location.href = "/login";
   };
 
-  const handleClick = () => {
+   const handleClick = () => {
     showToast("Please verify your FAT permit", "warning");
-  };
+    };
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-50">
@@ -239,7 +223,7 @@ export default function UserDashboard() {
         <nav className="mt-6">
           <Link
             href="/dashboard"
-            className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-blue-700 bg-blue-50 border-l-4 border-blue-600"
+            className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
             onClick={() => setSidebarOpen(false)}
           >
             <Home size={18} />
@@ -269,7 +253,7 @@ export default function UserDashboard() {
           </Link>
           <Link
             href="/history"
-            className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
+            className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-blue-700 bg-blue-50 border-l-4 border-blue-600"
             onClick={() => setSidebarOpen(false)}
           >
             <ArrowUpDown size={18} />
@@ -298,6 +282,7 @@ export default function UserDashboard() {
             <span>Help Center</span>
           </Link>
           <a
+            
             className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 mt-6 cursor-pointer"
             onClick={() => logout()}
           >
@@ -310,194 +295,40 @@ export default function UserDashboard() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Navigation (desktop) */}
-        <header className="hidden md:block bg-white border-b border-gray-200">
-          <div className="flex items-center justify-between px-6 py-4">
-            <div>
-              <h2 className="text-xl font-semibold text-gray-800">
-                My Dashboard
+
+        {/* Recent Transactions */}
+        <div className="bg-white rounded-lg border border-gray-200 shadow-sm mb-6">
+          <div className="border-b border-gray-200 p-4 md:p-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <h2 className="text-lg font-semibold text-gray-900">
+                Recent Transactions
               </h2>
-            </div>
-            <div className="flex items-center gap-6">
-              <button className="relative">
-                <Bell size={20} className="text-gray-600" />
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center"></span>
-              </button>
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium">
-                  {initials}
-                </div>
-                <span className="text-sm font-medium">
-                  {user.firstName} {user.lastName}{" "}
-                </span>
-                <ChevronDown size={16} className="text-gray-400" />
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* Dashboard Content */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-6">
-          {/* Mobile Dashboard Title */}
-          <div className="md:hidden mb-4">
-            <h2 className="text-xl font-semibold text-gray-800">
-              My Dashboard
-            </h2>
-          </div>
-
-          {/* Account Summary */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
-            <div className="lg:col-span-2 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl text-white p-4 md:p-6 shadow-lg">
-              {/* Account Information */}
-              <div className="flex flex-col sm:flex-row justify-around items-start mb-6 md:mb-8">
-                <div className="mb-4 sm:mb-0">
-                  <p className="text-blue-100 mb-1">Current Account</p>
-                  <h3 className="text-2xl font-bold mb-1">
-                    ${(user.balance || 0).toLocaleString()}
-                  </h3>
-                  <p className="text-sm text-blue-100">Available Balance</p>
-                </div>
-                <div className="flex flex-col items-start sm:items-end">
-                  <p className="text-sm text-blue-100 mb-1">Account Number</p>
-                  <span className="font-medium tracking-wider flex items-center gap-2">
-                    <span className="flex flex-col">
-                      {user.accountNumber}
-                      {copiedId === user.accountNumber && (
-                        <span className="text-sm text-green-300">Copied!</span>
-                      )}
-                    </span>
-                    <button
-                      onClick={() => copyToClipboard(user.accountNumber)}
-                      className="text-blue-300 hover:text-blue-100 transition-colors"
-                      title="Copy Account Number"
-                    >
-                      <FaCopy className="inline-block" />
-                    </button>
-                  </span>
-                </div>
-                <div className="flex flex-col items-start sm:items-end">
-                  <p className="text-sm text-blue-100 mb-1">FAT ID</p>
-                  <span className="font-medium tracking-wider flex items-center gap-2">
-                    <span className="flex flex-col">
-                      {user.fatId}
-                      {copiedId === user.fatId && (
-                        <span className="text-sm text-green-300">Copied!</span>
-                      )}
-                    </span>
-                    <button
-                      onClick={() => copyToClipboard(user.fatId)}
-                      className="text-blue-300 hover:text-blue-100 transition-colors"
-                      title="Copy Account Number"
-                    >
-                      <FaCopy className="inline-block" />
-                    </button>
-                  </span>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap gap-3">
-                <button
-                  onClick={() => setShowTransferModal(true)}
-                  className="flex items-center gap-2 bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg text-sm font-medium"
+              <div className="flex flex-wrap items-center gap-3">
+                <button className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 border border-gray-200 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+                  <Calendar size={16} />
+                  <span>This Week</span>
+                  <ChevronDown size={16} />
+                </button>
+                <Link
+                  href="/history"
+                  className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                 >
-                  <Send size={16} />
-                  <span>Send Money</span>
-                </button>
-                <button className="flex items-center gap-2 bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg text-sm font-medium">
-                  <Download size={16} />
-                  <span>Download Statement</span>
-                </button>
-              </div>
-              {/* FAT Verification Prompt */}
-              {user.fatStatus === "not verified" && (
-                <div className="bg-yellow-100 text-yellow-800 p-4 rounded-lg mt-6 flex items-center justify-between">
-                  <div>
-                    <p className="font-medium">Your FAT ID is not verified.</p>
-                    <p className="text-sm">
-                      Please verify your FAT ID to access all features.
-                    </p>
-                  </div>
-                  <a
-                    href={`${FAT_NAME}`}
-                    className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors text-sm font-medium"
-                  >
-                    Verify FAT ID
-                  </a>
-                </div>
-              )}
-            </div>
-
-            <div className="bg-white rounded-lg border border-gray-200 p-4 md:p-6 shadow-sm">
-              <h3 className="font-medium text-gray-800 mb-4">
-                Quick Transfers
-              </h3>
-              <div className="space-y-4">
-                {/* Placeholder for Quick Transfers */}
-                <div className="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-lg border border-dashed border-gray-200">
-                  <svg
-                    className="w-10 h-10 text-gray-400 mb-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <p className="text-sm text-gray-500 text-center mb-4">
-                    You haven’t set up any quick transfer recipients yet. Start
-                    sending money faster by adding your favorite recipients.
-                  </p>
-                  <button
-                    onClick={() => setShowTransferModal(true)}
-                    className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm font-medium"
-                  >
-                    <PlusCircle size={16} />
-                    <span>Add Recipient</span>
-                  </button>
-                </div>
+                  View All
+                </Link>
               </div>
             </div>
           </div>
 
-          {/* Recent Transactions */}
-          <div className="bg-white rounded-lg border border-gray-200 shadow-sm mb-6">
-            <div className="border-b border-gray-200 p-4 md:p-6">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <h2 className="text-lg font-semibold text-gray-900">
-                  Recent Transactions
-                </h2>
-                <div className="flex flex-wrap items-center gap-3">
-                  <button className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 border border-gray-200 rounded-md text-sm text-gray-700 hover:bg-gray-50">
-                    <Calendar size={16} />
-                    <span>This Week</span>
-                    <ChevronDown size={16} />
-                  </button>
-                  <Link
-                    href="/dashboard/history"
-                    className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-                  >
-                    View All
-                  </Link>
-                </div>
+          <div className="p-4 md:p-6 overflow-x-auto">
+            {loading ? (
+              <div className="flex items-center justify-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
               </div>
-            </div>
-
-            <div className="p-4 md:p-6 overflow-x-auto">
-              {loading ? (
-                <div className="flex items-center justify-center py-12">
-                  <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-                </div>
-              ) : (
-                <TransactionTable transactions={transactions} />
-              )}
-            </div>
+            ) : (
+              <TransactionTable transactions={transactions} />
+            )}
           </div>
-        </main>
+        </div>
       </div>
 
       {/* Overlay for mobile when sidebar is open */}
