@@ -130,26 +130,6 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Floating Particles Animation */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          {[...Array(30)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-white/30 rounded-full"
-              initial={{ y: 0, x: Math.random() * window.innerWidth }}
-              animate={{
-                y: window.innerHeight,
-                x: Math.random() * window.innerWidth,
-                opacity: [1, 0.5, 0],
-              }}
-              transition={{
-                duration: Math.random() * 5 + 5,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-        </div>
       </section>
 
       {/* Features Section with Animated Cards */}
