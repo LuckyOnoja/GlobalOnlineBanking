@@ -3,6 +3,18 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import {
+  Globe,
+  Users,
+  Heart,
+  Award,
+  TrendingUp,
+  Clock,
+  CheckCircle,
+  Calendar,
+  ArrowRight,
+  MapPin,
+} from "lucide-react";
 import MainLayout from "../components/layout/MainLayout";
 import Button from "../components/ui/Button";
 
@@ -22,6 +34,10 @@ export default function Home() {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
@@ -35,19 +51,30 @@ export default function Home() {
 
   return (
     <MainLayout>
-      {/* Hero Section with Parallax Effect */}
-      <section className="relative h-screen overflow-hidden  ">
+      {/* Hero Section with Advanced Parallax and Glass Morphism */}
+      <section className="relative h-screen overflow-hidden">
+        {/* Layered Background with Parallax */}
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{
-            backgroundImage: "url('/')",
+            backgroundImage: "url('/path-to-your-background-image.jpg')", // Add your image path
+            transform: `translateY(${scrollY * 0.3}px)`,
+          }}
+        />
+        <div
+          className="absolute inset-0 bg-cover bg-center z-0 opacity-70"
+          style={{
             transform: `translateY(${scrollY * 0.5}px)`,
           }}
         />
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary-900/70 via-primary-900/50 to-primary-900/70 z-10" />
+        {/* Glass Morphism Overlay */}
+        <div className="absolute inset-0 bg-white/5 backdrop-blur-lg z-10" />
 
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-900/70 via-primary-900/40 to-primary-900/70 z-10" />
+
+        {/* Content Container */}
         <div className="relative z-20 mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center max-w-7xl">
           <motion.div
             className="w-full text-center md:text-left"
@@ -55,19 +82,19 @@ export default function Home() {
             animate="visible"
             variants={staggerContainer}
           >
-            {/* Headline */}
+            {/* Headline with Glowing Text */}
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 md:mb-8"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 md:mb-8"
               variants={fadeInUp}
             >
               <span className="block">Global Online Banking</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 to-blue-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 to-blue-400 animate-gradient">
                 Reimagined
               </span>{" "}
               <span className="block sm:inline">for the Digital Age</span>
             </motion.h1>
 
-            {/* Subtitle */}
+            {/* Subtitle with Fade-In Animation */}
             <motion.p
               className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 md:mb-12 max-w-2xl mx-auto md:mx-0"
               variants={fadeInUp}
@@ -77,7 +104,7 @@ export default function Home() {
               connected world.
             </motion.p>
 
-            {/* Buttons */}
+            {/* Call-to-Action Buttons with Hover Effects */}
             <motion.div
               className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start"
               variants={fadeInUp}
@@ -85,7 +112,7 @@ export default function Home() {
               <Link href="/register" className="w-full sm:w-auto">
                 <Button
                   variant="primary"
-                  className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                  className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-primary-400 to-blue-500 hover:from-primary-500 hover:to-blue-600"
                 >
                   Get Started Now
                 </Button>
@@ -93,7 +120,8 @@ export default function Home() {
               <Link href="/login" className="w-full sm:w-auto">
                 <Button
                   variant="secondary"
-                  className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-white hover:bg-white/10 transition-all duration-300"
+                  className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-lg border-2 border-white/50 hover:border-white/80 bg-white/10 hover:bg-white/20 transition-all duration-300 text-white
+            "
                 >
                   Existing Customer Login
                 </Button>
@@ -102,31 +130,30 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-10 w-10 text-white"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+        {/* Floating Particles Animation */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {[...Array(30)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-white/30 rounded-full"
+              initial={{ y: 0, x: Math.random() * window.innerWidth }}
+              animate={{
+                y: window.innerHeight,
+                x: Math.random() * window.innerWidth,
+                opacity: [1, 0.5, 0],
+              }}
+              transition={{
+                duration: Math.random() * 5 + 5,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+              }}
             />
-          </svg>
-        </motion.div>
+          ))}
+        </div>
       </section>
 
       {/* Features Section with Animated Cards */}
-      <section className="py-24 bg-gradient-to-b from-white to-blue-50">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-20"
@@ -209,8 +236,8 @@ export default function Home() {
       </section>
 
       {/* Digital Banking Services */}
-      <div className="bg-white flex items-center justify-center">
-        <section className="py-24 bg-white w-full max-w-[90%] rounded-lg">
+      <div className=" flex items-center justify-center">
+        <section className="py-24  w-full max-w-[90%] rounded-lg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-900">
@@ -309,8 +336,147 @@ export default function Home() {
         </section>
       </div>
 
+      {/* Sustainability */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeIn}
+            >
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                Our Commitment to Sustainability
+              </h2>
+              <p className="text-lg text-gray-600 mb-6">
+                At GlobalBank, we believe financial institutions play a vital
+                role in creating a more sustainable future. Our comprehensive
+                sustainability strategy focuses on environmental stewardship,
+                social responsibility, and ethical governance.
+              </p>
+
+              <div className="space-y-6">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <CheckCircle className="h-6 w-6 text-blue-700" />
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="text-lg font-medium text-gray-900">
+                      Environmental Impact
+                    </h4>
+                    <p className="mt-1 text-gray-600">
+                      Committed to carbon neutrality by 2030 and funding $50B in
+                      sustainable projects over the next decade.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <CheckCircle className="h-6 w-6 text-blue-700" />
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="text-lg font-medium text-gray-900">
+                      Community Investment
+                    </h4>
+                    <p className="mt-1 text-gray-600">
+                      Investing $100M annually in financial education,
+                      affordable housing, and economic development.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <CheckCircle className="h-6 w-6 text-blue-700" />
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="text-lg font-medium text-gray-900">
+                      Responsible Banking
+                    </h4>
+                    <p className="mt-1 text-gray-600">
+                      Integrating ESG criteria into our lending and investment
+                      decisions to promote sustainable business practices.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <Link
+                href="/about"
+                className="mt-8 inline-flex items-center px-6 py-3 bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-800 transition-colors duration-300"
+              >
+                View Our Sustainability Report
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeIn}
+              className="relative"
+            >
+              <div className="relative bg-blue-100 rounded-2xl p-6 h-full">
+                <div className="absolute -right-4 -top-4 bg-blue-500 w-40 h-40 rounded-full opacity-20"></div>
+                <div className="absolute -left-8 -bottom-8 bg-blue-300 w-60 h-60 rounded-full opacity-20"></div>
+                <div className="relative z-10 p-6">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                    2024 Sustainability Highlights
+                  </h3>
+                  <div className="space-y-6">
+                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                      <div className="flex items-center">
+                        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                          <TrendingUp className="h-6 w-6 text-green-600" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-gray-900">$12B+</h4>
+                          <p className="text-sm text-gray-600">
+                            In sustainable financing
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                      <div className="flex items-center">
+                        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                          <Users className="h-6 w-6 text-green-600" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-gray-900">2.5M+</h4>
+                          <p className="text-sm text-gray-600">
+                            People reached through financial education
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                      <div className="flex items-center">
+                        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                          <Heart className="h-6 w-6 text-green-600" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-gray-900">300K+</h4>
+                          <p className="text-sm text-gray-600">
+                            Volunteer hours by our employees
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section with Sliding Animation */}
-      <section className="py-24 bg-blue-50">
+      <section className="py-24 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -385,8 +551,8 @@ export default function Home() {
       </section>
 
       {/* Global Presence Section */}
-      <div className="bg-white flex items-center justify-center py-8">
-        <section className="py-24 bg-white w-full max-w-[88%] rounded-lg">
+      <div className=" flex items-center justify-center py-8">
+        <section className="py-24  w-full max-w-[88%] rounded-lg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-900">
