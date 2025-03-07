@@ -201,7 +201,7 @@ export default function History() {
       >
         <div className="p-6 border-b border-gray-200">
           <h1 className="text-2xl font-bold text-blue-700">
-            Global<span className="text-blue-500">Bank</span>
+            Globalis<span className="text-blue-500">Bank</span>
           </h1>
           <p className="text-xs text-gray-500 mt-1">Online Banking</p>
         </div>
