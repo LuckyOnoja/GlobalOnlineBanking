@@ -133,7 +133,7 @@ export default function PropeneerDashboard() {
       >
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <h1 className="text-2xl font-bold text-blue-700">
-            Global<span className="text-blue-500">Bank</span>
+            Globalis<span className="text-blue-500">Bank</span>
           </h1>
           <button className="lg:hidden" onClick={() => setSidebarOpen(false)}>
             <X size={24} className="text-gray-500" />

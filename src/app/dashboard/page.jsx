@@ -195,7 +195,7 @@ export default function UserDashboard() {
             {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           <h1 className="text-xl font-bold text-blue-700">
-            Global<span className="text-blue-500">Bank</span>
+            Globalis<span className="text-blue-500">Bank</span>
           </h1>
         </div>
         <div className="flex items-center gap-4">

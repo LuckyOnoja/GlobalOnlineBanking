@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Global Online Banking",
-  description: "The Global Banking Platform Worldwide.",
+  title: "Globalis Bank",
+  description: "A Global Banking Platform Worldwide.",
 };
 
 export default function RootLayout({ children }) {

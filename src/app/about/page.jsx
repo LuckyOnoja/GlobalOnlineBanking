@@ -53,7 +53,7 @@ export default function AboutPage() {
                 Building A Better Financial Future Together
               </h1>
               <p className="text-xl mb-8">
-                Since 1985, GlobalBank has been a trusted partner helping
+                Since 2003, Globalis Bank has been a trusted partner helping
                 individuals and businesses achieve their financial goals through
                 innovation, integrity, and excellence.
               </p>
@@ -90,7 +90,7 @@ export default function AboutPage() {
                   Our Story
                 </h2>
                 <p className="text-lg text-gray-600 mb-6">
-                  GlobalBank was founded in 1985 with a simple mission: to
+                Globalis Bank was founded in 1985 with a simple mission: to
                   provide accessible, transparent financial services that
                   empower people and businesses to achieve their goals.
                 </p>
@@ -611,7 +611,7 @@ export default function AboutPage() {
               >
                 <Award className="h-12 w-12 text-blue-700 mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  Best Global Bank 2024
+                  Best Global Bank 2012
                 </h3>
                 <p className="text-gray-600 text-sm">
                   Financial Times Banking Awards

@@ -87,7 +87,7 @@ export default function Home() {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 md:mb-8"
               variants={fadeInUp}
             >
-              <span className="block">Global Online Banking</span>
+              <span className="block">Globalis Bank</span>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 to-blue-400 animate-gradient">
                 Reimagined
               </span>{" "}
@@ -129,7 +129,6 @@ export default function Home() {
             </motion.div>
           </motion.div>
         </div>
-
       </section>
 
       {/* Features Section with Animated Cards */}
@@ -143,7 +142,7 @@ export default function Home() {
             transition={{ duration: 0.7 }}
           >
             <h2 className="text-4xl font-bold text-gray-900">
-              Why Choose Global Online Banking?
+              Why Choose Globalis Bank?
             </h2>
             <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
               Experience the future of banking today with our innovative digital
@@ -330,7 +329,7 @@ export default function Home() {
                 Our Commitment to Sustainability
               </h2>
               <p className="text-lg text-gray-600 mb-6">
-                At GlobalBank, we believe financial institutions play a vital
+                At Globalis Bank, we believe financial institutions play a vital
                 role in creating a more sustainable future. Our comprehensive
                 sustainability strategy focuses on environmental stewardship,
                 social responsibility, and ethical governance.
@@ -412,9 +411,8 @@ export default function Home() {
                           <TrendingUp className="h-6 w-6 text-green-600" />
                         </div>
                         <div>
-                          <h4 className="font-medium text-gray-900">$12B+</h4>
                           <p className="text-sm text-gray-600">
-                            In sustainable financing
+                            sustainable financing
                           </p>
                         </div>
                       </div>
@@ -550,10 +548,10 @@ export default function Home() {
                   Banking Without Boundaries
                 </h3>
                 <p className="text-gray-600 mb-8">
-                  Global Online Banking operates in over 100 countries,
-                  providing seamless financial services across borders. Our
-                  international network ensures you can access your money and
-                  services no matter where life takes you.
+                  Globalis Bank operates in over 100 countries, providing
+                  seamless financial services across borders. Our international
+                  network ensures you can access your money and services no
+                  matter where life takes you.
                 </p>
 
                 <ul className="space-y-6">
@@ -624,7 +622,7 @@ export default function Home() {
               Ready to Transform Your Banking Experience?
             </h2>
             <p className="text-xl text-gray-300 mb-12">
-              Join Global Online Banking today and experience banking reimagined
+              Join Globalis Bank today and experience banking reimagined
               for the digital age. Opening an account takes less than 10
               minutes.
             </p>
