@@ -83,7 +83,7 @@ export default function Navbar() {
               <div className="bg-blue-600 text-white h-8 w-8 rounded-lg flex items-center justify-center font-bold text-xl">
                 G
               </div>
-              GlobalBank
+              GlobalisBank
             </span>
           </Link>
 
