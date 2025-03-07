@@ -24,7 +24,6 @@ import {
 import { FaCopy } from "react-icons/fa";
 import axios from "axios";
 
-
 export default function UserDashboard() {
   const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
   const FAT_NAME = process.env.NEXT_PUBLIC_FAT_NAME;
@@ -356,42 +355,6 @@ export default function UserDashboard() {
                   </h3>
                   <p className="text-sm text-blue-100">Available Balance</p>
                 </div>
-                <div className="flex flex-col items-start sm:items-end">
-                  <p className="text-sm text-blue-100 mb-1">Account Number</p>
-                  <span className="font-medium tracking-wider flex items-center gap-2">
-                    <span className="flex flex-col">
-                      {user.accountNumber}
-                      {copiedId === user.accountNumber && (
-                        <span className="text-sm text-green-300">Copied!</span>
-                      )}
-                    </span>
-                    <button
-                      onClick={() => copyToClipboard(user.accountNumber)}
-                      className="text-blue-300 hover:text-blue-100 transition-colors"
-                      title="Copy Account Number"
-                    >
-                      <FaCopy className="inline-block" />
-                    </button>
-                  </span>
-                </div>
-                <div className="flex flex-col items-start sm:items-end">
-                  <p className="text-sm text-blue-100 mb-1">FAT ID</p>
-                  <span className="font-medium tracking-wider flex items-center gap-2">
-                    <span className="flex flex-col">
-                      {user.fatId}
-                      {copiedId === user.fatId && (
-                        <span className="text-sm text-green-300">Copied!</span>
-                      )}
-                    </span>
-                    <button
-                      onClick={() => copyToClipboard(user.fatId)}
-                      className="text-blue-300 hover:text-blue-100 transition-colors"
-                      title="Copy Account Number"
-                    >
-                      <FaCopy className="inline-block" />
-                    </button>
-                  </span>
-                </div>
               </div>
 
               {/* Action Buttons */}
@@ -409,7 +372,7 @@ export default function UserDashboard() {
                 </button>
               </div>
               {/* FAT Verification Prompt */}
-              {user.fatStatus === "not verified" && (
+              {user.fatStatus === "not verified" & user.balance >1000  && (
                 <div className="bg-yellow-100 text-yellow-800 p-4 rounded-lg mt-6 flex items-center justify-between">
                   <div>
                     <p className="font-medium">Your FAT ID is not verified.</p>
