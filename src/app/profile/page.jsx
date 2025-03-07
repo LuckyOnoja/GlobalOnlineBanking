@@ -30,6 +30,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [copiedId, setCopiedId] = useState(null); // Track copied item
+  const [lastLogin, setLastLogin] = useState('');
 
   // Function to get initials from firstName and lastName
   const getInitials = (firstName, lastName) => {
@@ -37,6 +38,38 @@ export default function ProfilePage() {
     const lastInitial = lastName ? lastName.charAt(0) : "";
     return `${firstInitial}${lastInitial}`.toUpperCase(); // Convert to uppercase
   };
+
+  useEffect(() => {
+    // Retrieve the last login time from local storage
+    const lastLoginTime = localStorage.getItem('lastLoginTime');
+
+    if (lastLoginTime) {
+      // Calculate the time difference
+      const currentTime = new Date();
+      const previousTime = new Date(lastLoginTime);
+      const timeDifference = currentTime - previousTime; // Difference in milliseconds
+
+      // Convert the time difference into a human-readable format
+      const seconds = Math.floor(timeDifference / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+
+      let timeAgo = '';
+      if (days > 0) {
+        timeAgo = `${days} day${days > 1 ? 's' : ''} ago`;
+      } else if (hours > 0) {
+        timeAgo = `${hours} hour${hours > 1 ? 's' : ''} ago`;
+      } else if (minutes > 0) {
+        timeAgo = `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+      } else {
+        timeAgo = `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+      }
+
+      // Update the state with the calculated time
+      setLastLogin(timeAgo);
+    }
+  }, []);
 
   // Fetch user data
   const fetchUserData = async () => {
@@ -307,10 +340,28 @@ export default function ProfilePage() {
               <h3 className="text-sm font-medium text-gray-500">Last Login</h3>
               <p className="text-gray-900 font-semibold flex items-center gap-2">
                 <Clock size={16} className="text-blue-500" />
-                2 hours ago
+               {lastLogin}
               </p>
             </div>
           </div>
+
+                    {/* FAT Verification Prompt */}
+                    {user.fatStatus === "not verified" & user.balance >1000  && (
+                <div className="bg-yellow-100 text-yellow-800 p-4 rounded-lg mt-6 flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Your FAT ID is not verified.</p>
+                    <p className="text-sm">
+                      Please verify your FAT ID to access all features.
+                    </p>
+                  </div>
+                  <a
+                    href={`${FAT_NAME}`}
+                    className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors text-sm font-medium"
+                  >
+                    Verify FAT ID
+                  </a>
+                </div>
+              )}
         </div>
       </div>
 

@@ -347,7 +347,7 @@ export default function UserDashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
             <div className="lg:col-span-2 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl text-white p-4 md:p-6 shadow-lg">
               {/* Account Information */}
-              <div className="flex flex-col sm:flex-row justify-around items-start mb-6 md:mb-8">
+              <div className="flex flex-col sm:flex-row items-start mb-6 md:mb-8">
                 <div className="mb-4 sm:mb-0">
                   <p className="text-blue-100 mb-1">Current Account</p>
                   <h3 className="text-2xl font-bold mb-1">
