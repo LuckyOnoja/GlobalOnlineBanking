@@ -105,7 +105,7 @@ export default function ProfilePage() {
   };
 
   const handleClick = () => {
-    showToast("Please verify your FAT permit", "warning");
+    showToast("Please Contact The Customer Care", "warning");
   };
 
   // Function to copy the account number or FAT ID to the clipboard

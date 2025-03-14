@@ -163,9 +163,9 @@ export default function History() {
     window.location.href = "/login";
   };
 
-   const handleClick = () => {
-    showToast("Please verify your FAT permit", "warning");
-    };
+  const handleClick = () => {
+    showToast("Please Contact The Customer Care", "warning");
+  };
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-50">

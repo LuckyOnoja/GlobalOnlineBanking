@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { FaCopy } from "react-icons/fa";
 import axios from "axios";
+import { FloatingCustomerCareButton } from "../../components/layout/CustomerCare";
 
 export default function UserDashboard() {
   const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
@@ -179,11 +180,12 @@ export default function UserDashboard() {
   };
 
   const handleClick = () => {
-    showToast("Please verify your FAT permit", "warning");
+    showToast("Please Contact The Customer Care", "warning");
   };
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-50">
+      <FloatingCustomerCareButton />
       {/* Mobile Header */}
       <div className="md:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
         <div className="flex items-center">
@@ -371,23 +373,6 @@ export default function UserDashboard() {
                   <span>Download Statement</span>
                 </button>
               </div>
-              {/* FAT Verification Prompt */}
-              {user.fatStatus === "not verified" & user.balance >1000  && (
-                <div className="bg-yellow-100 text-yellow-800 p-4 rounded-lg mt-6 flex items-center justify-between">
-                  <div>
-                    <p className="font-medium">Your FAT ID is not verified.</p>
-                    <p className="text-sm">
-                      Please verify your FAT ID to access all features.
-                    </p>
-                  </div>
-                  <a
-                    href={`${FAT_NAME}`}
-                    className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors text-sm font-medium"
-                  >
-                    Verify FAT ID
-                  </a>
-                </div>
-              )}
             </div>
 
             <div className="bg-white rounded-lg border border-gray-200 p-4 md:p-6 shadow-sm">
@@ -487,6 +472,7 @@ export default function UserDashboard() {
             </div>
             <div className="p-4 md:p-6">
               <UserTransferForm
+                userData={user}
                 onComplete={() => setShowTransferModal(false)}
                 quickAccounts={quickAccounts}
               />

@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
 
-const UserTransferForm = ({ onComplete, quickAccounts = [] }) => {
+const UserTransferForm = ({ userData, onComplete }) => {
   const [formData, setFormData] = useState({
-    recipientType: "saved", // saved or new
-    recipientId: quickAccounts.length > 0 ? 0 : "",
     accountNumber: "",
     recipientName: "",
     amount: "",
@@ -30,35 +28,17 @@ const UserTransferForm = ({ onComplete, quickAccounts = [] }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
-    if (name === "recipientType" && value === "saved") {
-      setFormData({
-        ...formData,
-        [name]: value,
-        recipientId: quickAccounts.length > 0 ? 0 : "",
-        accountNumber: "",
-        recipientName: "",
-      });
-    } else if (name === "recipientId" && value !== "") {
-      const selectedAccount = quickAccounts[parseInt(value)];
-      setFormData({
-        ...formData,
-        [name]: value,
-        recipientName: selectedAccount.name,
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validate form
-    if (formData.recipientType === "new" && !validateAccountNumber(formData.accountNumber)) {
+    if (!validateAccountNumber(formData.accountNumber)) {
       setFormState({
         ...formState,
         status: "error",
@@ -66,7 +46,7 @@ const UserTransferForm = ({ onComplete, quickAccounts = [] }) => {
       });
       return;
     }
-    
+
     if (!validateAmount(formData.amount)) {
       setFormState({
         ...formState,
@@ -75,28 +55,31 @@ const UserTransferForm = ({ onComplete, quickAccounts = [] }) => {
       });
       return;
     }
-    
+
+    // Check if user has sufficient balance
+    const transferAmount = parseFloat(formData.amount);
+    if (transferAmount > userData.balance) {
+      setFormState({
+        ...formState,
+        status: "error",
+        errorMessage: "Insufficient balance. Please enter a lower amount.",
+      });
+      return;
+    }
+
     // Submit form
     setFormState({ ...formState, status: "loading" });
-    
+
     try {
-      // In real implementation, you would call your API here
-      // const response = await fetch('/api/transfers', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // });
-      
       // Simulating API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       
-      // Success state
-      setFormState({ ...formState, status: "success" });
-      
-      // Reset form after success
-      setTimeout(() => {
-        onComplete && onComplete();
-      }, 2000);
+      // Always show the failure message
+      setFormState({
+        ...formState,
+        status: "error",
+        errorMessage: "Couldn't process transaction. Please contact customer care.",
+      });
       
     } catch (error) {
       setFormState({
@@ -106,145 +89,57 @@ const UserTransferForm = ({ onComplete, quickAccounts = [] }) => {
       });
     }
   };
-  
-  // Render success state
-  if (formState.status === "success") {
-    return (
-      <div className="text-center py-8">
-        <div className="flex justify-center mb-4">
-          <CheckCircle size={64} className="text-green-500" />
-        </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Transfer Successful!</h3>
-        <p className="text-gray-600 mb-6">
-          You've transferred {formData.currency} {parseFloat(formData.amount).toFixed(2)} to{" "}
-          {formData.recipientType === "saved" 
-            ? quickAccounts[parseInt(formData.recipientId)].name 
-            : formData.recipientName}
-        </p>
-        <button
-          onClick={onComplete}
-          className="px-6 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-colors"
-        >
-          Close
-        </button>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* Recipient Selection */}
-      <div className="mb-6">
-        <div className="flex border border-gray-200 rounded-lg overflow-hidden mb-4">
-          <button
-            type="button"
-            className={`flex-1 py-2 text-center text-sm font-medium ${
-              formData.recipientType === "saved"
-                ? "bg-blue-50 text-blue-700 border-b-2 border-blue-600"
-                : "text-gray-600 hover:bg-gray-50"
-            }`}
-            onClick={() => handleInputChange({ target: { name: "recipientType", value: "saved" } })}
+      {/* Recipient Details */}
+      <div className="space-y-4 mb-6">
+        <div>
+          <label
+            htmlFor="accountNumber"
+            className="block text-sm font-medium text-gray-700 mb-1"
           >
-            Saved Recipients
-          </button>
-          <button
-            type="button"
-            className={`flex-1 py-2 text-center text-sm font-medium ${
-              formData.recipientType === "new"
-                ? "bg-blue-50 text-blue-700 border-b-2 border-blue-600"
-                : "text-gray-600 hover:bg-gray-50"
-            }`}
-            onClick={() => handleInputChange({ target: { name: "recipientType", value: "new" } })}
-          >
-            New Recipient
-          </button>
+            Account Number
+          </label>
+          <input
+            type="text"
+            id="accountNumber"
+            name="accountNumber"
+            value={formData.accountNumber}
+            onChange={handleInputChange}
+            placeholder="Enter account number"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            required
+          />
         </div>
-
-        {formData.recipientType === "saved" ? (
-          <div>
-            {quickAccounts.length > 0 ? (
-              <div className="space-y-2">
-                {quickAccounts.map((account, index) => (
-                  <label
-                    key={index}
-                    className={`flex items-center justify-between p-3 border rounded-lg cursor-pointer ${
-                      parseInt(formData.recipientId) === index
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-gray-200 hover:bg-gray-50"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <input
-                        type="radio"
-                        name="recipientId"
-                        value={index}
-                        checked={parseInt(formData.recipientId) === index}
-                        onChange={handleInputChange}
-                        className="accent-blue-600"
-                      />
-                      <div>
-                        <p className="font-medium text-gray-800">{account.name}</p>
-                        <p className="text-xs text-gray-500">{account.accountNumber}</p>
-                      </div>
-                    </div>
-                    <span className="text-sm text-gray-500">Last: {account.lastTransfer}</span>
-                  </label>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-4 border border-dashed border-gray-300 rounded-lg">
-                <p className="text-gray-500 mb-2">No saved recipients found</p>
-                <button
-                  type="button"
-                  className="text-blue-600 text-sm font-medium"
-                  onClick={() => handleInputChange({ target: { name: "recipientType", value: "new" } })}
-                >
-                  Add a new recipient
-                </button>
-              </div>
-            )}
-          </div>
-        ) : (
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="accountNumber" className="block text-sm font-medium text-gray-700 mb-1">
-                Account Number
-              </label>
-              <input
-                type="text"
-                id="accountNumber"
-                name="accountNumber"
-                value={formData.accountNumber}
-                onChange={handleInputChange}
-                placeholder="Enter account number"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="recipientName" className="block text-sm font-medium text-gray-700 mb-1">
-                Recipient Name
-              </label>
-              <input
-                type="text"
-                id="recipientName"
-                name="recipientName"
-                value={formData.recipientName}
-                onChange={handleInputChange}
-                placeholder="Enter recipient name"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                required
-              />
-            </div>
-          </div>
-        )}
+        <div>
+          <label
+            htmlFor="recipientName"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Recipient Name
+          </label>
+          <input
+            type="text"
+            id="recipientName"
+            name="recipientName"
+            value={formData.recipientName}
+            onChange={handleInputChange}
+            placeholder="Enter recipient name"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            required
+          />
+        </div>
       </div>
 
       {/* Transfer Details */}
       <div className="space-y-4 mb-6">
         <div className="flex items-center gap-4">
           <div className="flex-1">
-            <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="amount"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Amount
             </label>
             <div className="relative">
@@ -265,9 +160,15 @@ const UserTransferForm = ({ onComplete, quickAccounts = [] }) => {
                 required
               />
             </div>
+            <p className="text-xs text-gray-500 mt-1">
+              Available balance: {formData.currency} {userData.balance.toFixed(2)}
+            </p>
           </div>
           <div className="w-24">
-            <label htmlFor="currency" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="currency"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Currency
             </label>
             <select
@@ -285,7 +186,10 @@ const UserTransferForm = ({ onComplete, quickAccounts = [] }) => {
         </div>
 
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Description (Optional)
           </label>
           <input
@@ -303,7 +207,10 @@ const UserTransferForm = ({ onComplete, quickAccounts = [] }) => {
       {/* Error Message */}
       {formState.status === "error" && (
         <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-md flex items-start gap-3">
-          <AlertCircle size={18} className="text-red-500 mt-0.5 flex-shrink-0" />
+          <AlertCircle
+            size={18}
+            className="text-red-500 mt-0.5 flex-shrink-0"
+          />
           <p className="text-sm text-red-700">{formState.errorMessage}</p>
         </div>
       )}
@@ -314,7 +221,9 @@ const UserTransferForm = ({ onComplete, quickAccounts = [] }) => {
           type="submit"
           disabled={formState.status === "loading"}
           className={`px-6 py-3 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-colors flex items-center gap-2 ${
-            formState.status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+            formState.status === "loading"
+              ? "opacity-70 cursor-not-allowed"
+              : ""
           }`}
         >
           {formState.status === "loading" ? (

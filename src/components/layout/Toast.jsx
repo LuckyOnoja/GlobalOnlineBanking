@@ -34,14 +34,7 @@ export const showToast = (message, type = "default") => {
       toast.warning(
         <div>
           <p>{message}</p>
-          <Link
-            href={`${FAT_NAME}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 inline-block px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors"
-          >
-            Verify FAT
-          </Link>
+        
         </div>
       );
       break;
