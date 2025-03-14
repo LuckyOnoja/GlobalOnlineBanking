@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { FaCopy } from "react-icons/fa";
 import axios from "axios";
+import { FloatingCustomerCareButton } from "../../components/layout/CustomerCare";
 
 export default function History() {
   const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
@@ -169,6 +170,7 @@ export default function History() {
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-50">
+        <FloatingCustomerCareButton />
       {/* Mobile Header */}
       <div className="md:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
         <div className="flex items-center">

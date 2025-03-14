@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import axios from "axios";
 import { showToast } from "../../components/layout/Toast";
+import { FloatingCustomerCareButton } from "../../components/layout/CustomerCare";
 
 export default function ProfilePage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -139,6 +140,7 @@ export default function ProfilePage() {
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-50">
+        <FloatingCustomerCareButton />
       {/* Mobile Header */}
       <div className="md:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
         <div className="flex items-center">
