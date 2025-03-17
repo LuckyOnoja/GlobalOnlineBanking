@@ -49,6 +49,14 @@ const CustomerCareModal = ({ isOpen, onClose }) => {
     setShowingResponse(false);
   };
 
+  const handleCallSupport = () => {
+    window.location.href = "tel:+1234567890"; // Replace with the actual phone number if available
+  };
+
+  const handleEmailSupport = () => {
+    window.location.href = "mailto:sglobalis35@gmail.com";
+  };
+
   if (!isOpen) return null;
 
   const selectedQuestionData = supportQuestions.find(q => q.id === selectedQuestion);
@@ -103,10 +111,16 @@ const CustomerCareModal = ({ isOpen, onClose }) => {
                   Still need help? Our support team is available 24/7.
                 </p>
                 <div className="mt-2 flex space-x-3">
-                  <button className="px-3 py-2 text-xs font-medium bg-blue-600 text-white rounded">
+                  <button 
+                    onClick={handleCallSupport}
+                    className="px-3 py-2 text-xs font-medium bg-blue-600 text-white rounded"
+                  >
                     Call Support
                   </button>
-                  <button className="px-3 py-2 text-xs font-medium border border-blue-600 text-blue-600 rounded">
+                  <button 
+                    onClick={handleEmailSupport}
+                    className="px-3 py-2 text-xs font-medium border border-blue-600 text-blue-600 rounded"
+                  >
                     Email Support
                   </button>
                 </div>
