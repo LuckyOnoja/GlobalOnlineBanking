@@ -53,7 +53,6 @@ export default function PropeneerDashboard() {
         },
       });
       setPropeneer(res.data.user);
-      console.log("Propeneer", res.data.user);
       setError("");
     } catch (error) {
       setPropeneer(null);
@@ -77,7 +76,6 @@ export default function PropeneerDashboard() {
       });
 
       setTransactions(res.data.transactions);
-      console.log("TRANSACTION DETAIL", res.data.transactions);
       setLoading(false);
     } catch (error) {
       setError(

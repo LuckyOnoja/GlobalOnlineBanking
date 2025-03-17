@@ -78,7 +78,6 @@ export default function UserDashboard() {
         },
       });
       setUser(res.data.user);
-      console.log("USER", res.data.user);
       setError("");
     } catch (error) {
       setUser(null);
@@ -103,7 +102,6 @@ export default function UserDashboard() {
       });
 
       setTransactions(res.data.transactions);
-      console.log("TRANSACTION DETAIL", res.data.transactions);
       setLoading(false);
     } catch (error) {
       setError(
