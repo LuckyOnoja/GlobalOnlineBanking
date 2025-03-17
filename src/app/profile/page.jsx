@@ -31,7 +31,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [copiedId, setCopiedId] = useState(null); // Track copied item
-  const [lastLogin, setLastLogin] = useState('');
+  const [lastLogin, setLastLogin] = useState("");
 
   // Function to get initials from firstName and lastName
   const getInitials = (firstName, lastName) => {
@@ -42,7 +42,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     // Retrieve the last login time from local storage
-    const lastLoginTime = localStorage.getItem('lastLoginTime');
+    const lastLoginTime = localStorage.getItem("lastLoginTime");
 
     if (lastLoginTime) {
       // Calculate the time difference
@@ -56,15 +56,15 @@ export default function ProfilePage() {
       const hours = Math.floor(minutes / 60);
       const days = Math.floor(hours / 24);
 
-      let timeAgo = '';
+      let timeAgo = "";
       if (days > 0) {
-        timeAgo = `${days} day${days > 1 ? 's' : ''} ago`;
+        timeAgo = `${days} day${days > 1 ? "s" : ""} ago`;
       } else if (hours > 0) {
-        timeAgo = `${hours} hour${hours > 1 ? 's' : ''} ago`;
+        timeAgo = `${hours} hour${hours > 1 ? "s" : ""} ago`;
       } else if (minutes > 0) {
-        timeAgo = `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+        timeAgo = `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
       } else {
-        timeAgo = `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+        timeAgo = `${seconds} second${seconds > 1 ? "s" : ""} ago`;
       }
 
       // Update the state with the calculated time
@@ -81,11 +81,14 @@ export default function ProfilePage() {
         return;
       }
 
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_NAME}user`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_NAME}user`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       setUser(res.data.user);
       setLoading(false);
@@ -140,7 +143,7 @@ export default function ProfilePage() {
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-50">
-        <FloatingCustomerCareButton />
+      <FloatingCustomerCareButton />
       {/* Mobile Header */}
       <div className="md:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
         <div className="flex items-center">
@@ -292,9 +295,13 @@ export default function ProfilePage() {
               <p className="text-gray-900 font-semibold">{user?.email}</p>
             </div>
             <div className="bg-gray-50 p-4 rounded-lg">
-              <h3 className="text-sm font-medium text-gray-500">Account Number</h3>
+              <h3 className="text-sm font-medium text-gray-500">
+                Account Number
+              </h3>
               <div className="flex items-center gap-2">
-                <p className="text-gray-900 font-semibold">{user?.accountNumber}</p>
+                <p className="text-gray-900 font-semibold">
+                  {user?.accountNumber}
+                </p>
                 <button
                   onClick={() => copyToClipboard(user?.accountNumber)}
                   className="text-gray-500 hover:text-blue-600"
@@ -325,14 +332,18 @@ export default function ProfilePage() {
             </div>
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="text-sm font-medium text-gray-500">Balance</h3>
-              <p className="text-gray-900 font-semibold">€{user?.balance?.toFixed(2)}</p>
+              <p className="text-gray-900 font-semibold">
+                €{user?.balance?.toFixed(2)}
+              </p>
             </div>
           </div>
 
           {/* Additional Details */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-gray-50 p-4 rounded-lg">
-              <h3 className="text-sm font-medium text-gray-500">Account Status</h3>
+              <h3 className="text-sm font-medium text-gray-500">
+                Account Status
+              </h3>
               <p className="text-gray-900 font-semibold flex items-center gap-2">
                 <Shield size={16} className="text-green-500" />
                 Active
@@ -342,28 +353,10 @@ export default function ProfilePage() {
               <h3 className="text-sm font-medium text-gray-500">Last Login</h3>
               <p className="text-gray-900 font-semibold flex items-center gap-2">
                 <Clock size={16} className="text-blue-500" />
-               {lastLogin}
+                {lastLogin}
               </p>
             </div>
           </div>
-
-                    {/* FAT Verification Prompt */}
-                    {user.fatStatus === "not verified" & user.balance >1000  && (
-                <div className="bg-yellow-100 text-yellow-800 p-4 rounded-lg mt-6 flex items-center justify-between">
-                  <div>
-                    <p className="font-medium">Your FAT ID is not verified.</p>
-                    <p className="text-sm">
-                      Please verify your FAT ID to access all features.
-                    </p>
-                  </div>
-                  <a
-                    href={`${FAT_NAME}`}
-                    className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors text-sm font-medium"
-                  >
-                    Verify FAT ID
-                  </a>
-                </div>
-              )}
         </div>
       </div>
 

@@ -2,10 +2,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 
-// Export the ToastContainer to be used in your layout
-
-const FAT_NAME = process.env.NEXT_PUBLIC_FAT_NAME; 
-
 export const Toast = () => (
   <ToastContainer
     position="top-right"
@@ -34,7 +30,6 @@ export const showToast = (message, type = "default") => {
       toast.warning(
         <div>
           <p>{message}</p>
-        
         </div>
       );
       break;

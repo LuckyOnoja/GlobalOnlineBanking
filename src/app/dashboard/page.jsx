@@ -27,7 +27,6 @@ import { FloatingCustomerCareButton } from "../../components/layout/CustomerCare
 
 export default function UserDashboard() {
   const SERVER_NAME = process.env.NEXT_PUBLIC_SERVER_NAME;
-  const FAT_NAME = process.env.NEXT_PUBLIC_FAT_NAME;
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
