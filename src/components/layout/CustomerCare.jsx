@@ -50,7 +50,7 @@ const CustomerCareModal = ({ isOpen, onClose }) => {
   };
 
   const handleCallSupport = () => {
-    window.location.href = "tel:+1234567890"; // Replace with the actual phone number if available
+    window.location.href = "mailto:sglobalis35@gmail.com"; 
   };
 
   const handleEmailSupport = () => {
