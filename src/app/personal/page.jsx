@@ -296,7 +296,7 @@ export default function PersonalBankingPage() {
             >
               <h2 className="text-3xl font-bold mb-6">Ready to Get Started?</h2>
               <p className="text-xl mb-8 max-w-3xl mx-auto">
-                Join millions of satisfied customers who trust GlobalBank with
+                Join millions of satisfied customers who trust GlobalisBank with
                 their personal finances.
               </p>
               <div className="flex flex-wrap justify-center gap-4">

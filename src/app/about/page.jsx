@@ -460,7 +460,7 @@ export default function AboutPage() {
                   Our Commitment to Sustainability
                 </h2>
                 <p className="text-lg text-gray-600 mb-6">
-                  At GlobalBank, we believe financial institutions play a vital
+                  At GlobalisBank, we believe financial institutions play a vital
                   role in creating a more sustainable future. Our comprehensive
                   sustainability strategy focuses on environmental stewardship,
                   social responsibility, and ethical governance.
@@ -653,7 +653,7 @@ export default function AboutPage() {
               variants={fadeIn}
             >
               <h2 className="text-3xl font-bold mb-6">
-                Join the GlobalBank Family
+                Join the GlobalisBank Family
               </h2>
               <p className="text-xl mb-8 max-w-3xl mx-auto">
                 Whether you're looking for a banking partner or a career

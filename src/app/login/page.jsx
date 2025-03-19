@@ -65,7 +65,7 @@ function LoginForm() {
           <div className="text-center">
             <h2 className="text-3xl font-bold text-gray-900">Welcome Back</h2>
             <p className="mt-2 text-gray-600">
-              Sign in to your GlobalBank account
+              Sign in to your GlobalisBank account
             </p>
           </div>
 

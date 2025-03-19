@@ -342,7 +342,7 @@ export default function BusinessBankingPage() {
                 Trusted by Businesses Worldwide
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                See why thousands of businesses choose GlobalBank for their financial needs.
+                See why thousands of businesses choose GlobalisBank for their financial needs.
               </p>
             </div>
 
@@ -367,7 +367,7 @@ export default function BusinessBankingPage() {
                   </div>
                 </div>
                 <p className="text-gray-700 mb-6">
-                  "GlobalBank's trade finance solutions have been instrumental in our international expansion. Their expertise in cross-border transactions has saved us time and money."
+                  "GlobalisBank's trade finance solutions have been instrumental in our international expansion. Their expertise in cross-border transactions has saved us time and money."
                 </p>
                 <div>
                   <p className="font-bold text-gray-900">Sarah Johnson</p>
@@ -389,7 +389,7 @@ export default function BusinessBankingPage() {
                   </div>
                 </div>
                 <p className="text-gray-700 mb-6">
-                  "As a growing manufacturing company, we needed flexible financing options. GlobalBank understood our needs and created a custom solution that helped us expand our production capacity."
+                  "As a growing manufacturing company, we needed flexible financing options. GlobalisBank understood our needs and created a custom solution that helped us expand our production capacity."
                 </p>
                 <div>
                   <p className="font-bold text-gray-900">Michael Chen</p>
@@ -433,7 +433,7 @@ export default function BusinessBankingPage() {
             >
               <h2 className="text-3xl font-bold mb-6">Ready to Take Your Business Further?</h2>
               <p className="text-xl mb-8 max-w-3xl mx-auto">
-                Join thousands of businesses that trust GlobalBank with their financial success.
+                Join thousands of businesses that trust GlobalisBank with their financial success.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link

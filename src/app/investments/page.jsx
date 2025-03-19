@@ -49,7 +49,7 @@ export default function InvestmentsPage() {
     <MainLayout>
       <div className="min-h-screen bg-white">
         <Head>
-          <title>Investment Services | GlobalBank</title>
+          <title>Investment Services | GlobalisBank</title>
           <meta
             name="description"
             content="Investment solutions to grow your wealth"
@@ -321,7 +321,7 @@ export default function InvestmentsPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Why Invest With GlobalBank
+                Why Invest With GlobalisBank
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                 We combine global expertise with personalized service to help

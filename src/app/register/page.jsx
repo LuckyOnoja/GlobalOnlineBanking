@@ -68,7 +68,7 @@ export default function RegisterPage() {
               Create Your Account
             </h2>
             <p className="mt-2 text-gray-600">
-              Join GlobalBank and start managing your finances
+              Join GlobalisBank and start managing your finances
             </p>
           </div>
 

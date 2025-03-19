@@ -17,24 +17,40 @@ export default function HelpPage() {
   // FAQ data
   const faqs = [
     {
-      question: "How do I reset my password?",
+      id: 1,
+      question: "Why was my transaction declined?",
       answer:
-        "To reset your password, go to the login page and click on 'Forgot Password'. Follow the instructions sent to your email.",
+        "Transactions may be declined for several reasons including insufficient funds, suspicious activity detected, incorrect account information, or technical issues with our payment processor. If this is a recurring issue, please ensure your account details are up to date and your balance is sufficient for the transaction amount.",
     },
     {
+      id: 2,
       question: "How do I update my account information?",
       answer:
-        "You can update your account information by navigating to the 'Profile' section in your dashboard.",
+        "To update your account information, go to your Account Settings page and select the 'Personal Details' section. From there, you can modify your personal information, contact details, and preferences. Don't forget to click 'Save Changes' when you're finished. Please note that some changes may require additional verification.",
     },
     {
-      question: "What should I do if I suspect fraudulent activity?",
+      id: 3,
+      question: "When will my transfer be completed?",
       answer:
-        "Immediately contact our support team at support@globalbank.com or call our helpline at +1 (555) 123-4567.",
+        "Most transfers are processed within 1-2 business days. However, international transfers may take 3-5 business days depending on the destination country and banking system. If your transfer has been pending for longer than expected, please wait one more business day before contacting us again.",
     },
     {
-      question: "How do I add a new recipient for transfers?",
+      id: 4,
+      question: "How do I report unauthorized transactions?",
       answer:
-        "Go to the 'Transfers' section and click on 'Add Recipient'. Fill in the required details and save.",
+        "If you notice any unauthorized transactions on your account, please contact our security team immediately by calling our 24/7 hotline at +1-800-555-0123. For your protection, we recommend changing your password and enabling two-factor authentication on your account.",
+    },
+    {
+      id: 5,
+      question: "What are the transfer limits?",
+      answer:
+        "Standard accounts have a daily transfer limit of €10,000 and a monthly limit of €50,000. Premium accounts have higher limits of €25,000 daily and €100,000 monthly. If you need to make a larger transfer, please contact our customer service team to request a temporary limit increase.",
+    },
+    {
+      id: 6,
+      question: "I forgot my password, what should I do?",
+      answer:
+        "To reset your password, click on the 'Forgot Password' link on the login page. We'll send a password reset link to your registered email address. For security reasons, this link will expire after 24 hours. If you don't receive the email, please check your spam folder or contact customer support.",
     },
   ];
 
@@ -43,10 +59,14 @@ export default function HelpPage() {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
+  const handleEmailSupport = () => {
+    window.location.href = "mailto:sglobalis35@gmail.com";
+  };
+
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-50">
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col ">
         {/* Help Section */}
         <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 m-6">
           {/* Back Button */}
@@ -98,35 +118,41 @@ export default function HelpPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Email Support */}
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <div
+                className="bg-gray-50 p-4 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-400"
+                onClick={handleEmailSupport}
+              >
                 <div className="flex items-center gap-3">
                   <Mail size={20} className="text-blue-600" />
                   <div>
-                    <h3 className="text-sm font-medium text-gray-900">
+                    <h3 className="text-sm font-medium text-gray-900 ">
                       Email Support
                     </h3>
-                    <p className="text-sm text-gray-600">
-                      support@globalbank.com
-                    </p>
                   </div>
                 </div>
               </div>
 
               {/* Phone Support */}
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <div
+                className="bg-gray-50 p-4 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-400"
+                onClick={handleEmailSupport}
+              >
                 <div className="flex items-center gap-3">
                   <Phone size={20} className="text-blue-600" />
                   <div>
-                    <h3 className="text-sm font-medium text-gray-900">
+                    <h3
+                      className="text-sm font-medium text-gray-900"
+                    >
                       Phone Support
                     </h3>
-                    <p className="text-sm text-gray-600">+1 (555) 123-4567</p>
                   </div>
                 </div>
               </div>
 
               {/* Live Chat */}
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-400"
+                onClick={handleEmailSupport}
+              >
                 <div className="flex items-center gap-3">
                   <MessageCircle size={20} className="text-blue-600" />
                   <div>
